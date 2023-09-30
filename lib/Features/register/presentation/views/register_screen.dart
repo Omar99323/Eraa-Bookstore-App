@@ -36,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             mobileSnackBarPosition: MobileSnackBarPosition.top,
           ).show(context);
-          Navigator.pushReplacementNamed(context, HomePage.id);
+          Navigator.pushReplacementNamed(context, HomePage.id,arguments: BlocProvider.of<RegisterCubit>(context).userModel);
         }
         if (state is RegisterFailure) {
           AnimatedSnackBar.material(

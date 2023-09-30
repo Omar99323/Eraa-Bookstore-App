@@ -1,9 +1,11 @@
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
+import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/best_seller_book.dart';
 import 'package:flutter/material.dart';
 
 class NewArrivalSection extends StatelessWidget {
-  const NewArrivalSection({super.key});
+  const NewArrivalSection({super.key, required this.newArrivalBooks});
+  final List<BookModel> newArrivalBooks;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,10 @@ class NewArrivalSection extends StatelessWidget {
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
-            itemBuilder: (context, index) =>  Container(),
+            itemCount: newArrivalBooks.length,
+            itemBuilder: (context, index) => BestSellerBook(
+              bookModel: newArrivalBooks[index],
+            ),
             separatorBuilder: (context, index) => const SizedBox(width: 10),
           ),
         ),
@@ -45,4 +49,3 @@ class NewArrivalSection extends StatelessWidget {
     );
   }
 }
-// BestSellerBook(bookModel: null),

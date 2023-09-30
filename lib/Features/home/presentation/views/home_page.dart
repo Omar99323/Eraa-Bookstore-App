@@ -1,6 +1,7 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
+import 'package:book_store_eraa/Features/login/data/models/login_model.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      LoginUserModel model=ModalRoute.of(context)!.settings.arguments as LoginUserModel;
+    BlocProvider.of<HomeCubit>(context).getUserModel(model);
+   });
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
@@ -72,9 +83,13 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 15,
-                vertical: 30,
+                vertical: 10,
               ),
-              child: homecbt.slinderImgs.isEmpty||homecbt.listofBestSeller.isEmpty
+              child: homecbt.slinderImgs.isEmpty ||
+                      homecbt.listofBestSeller.isEmpty ||
+                      homecbt.listofNewArrival.isEmpty ||
+                      homecbt.listofCategories.isEmpty||
+                      homecbt.userModel==null
                   ? const Center(
                       child: CircularProgressIndicator.adaptive(),
                     )

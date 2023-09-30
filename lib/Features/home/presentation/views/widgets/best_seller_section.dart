@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class BestSellerSection extends StatelessWidget {
   const BestSellerSection({
-    super.key, required this.bestSellerBooks,
+    super.key,
+    required this.bestSellerBooks,
   });
   final List<BookModel> bestSellerBooks;
 
@@ -41,7 +42,9 @@ class BestSellerSection extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: bestSellerBooks.length,
-            itemBuilder: (context, index) =>  BestSellerBook(bookModel: bestSellerBooks[index],),
+            itemBuilder: (context, index) => BestSellerBook(
+              bookModel: bestSellerBooks[index],
+            ),
             separatorBuilder: (context, index) => const SizedBox(width: 10),
           ),
         ),

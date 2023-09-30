@@ -27,7 +27,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => HomeCubit()..getSliders()..getBestSeller(),
+          create: (context) => HomeCubit()
+            ..getSliders()
+            ..getBestSeller()
+            ..getNewArrival()
+            ..getCategories(),
         ),
         BlocProvider(
           create: (context) => LoginCubit(),
@@ -46,7 +50,8 @@ class MyApp extends StatelessWidget {
         routes: {
           SplashScreen.id: (context) => const SplashScreen(),
           FirstOnBoardingScreen.id: (context) => const FirstOnBoardingScreen(),
-          SecondOnBoardingScreen.id: (context) => const SecondOnBoardingScreen(),
+          SecondOnBoardingScreen.id: (context) =>
+              const SecondOnBoardingScreen(),
           RegisterScreen.id: (context) => const RegisterScreen(),
           LoginScreen.id: (context) => const LoginScreen(),
           HomePage.id: (context) => const HomePage(),

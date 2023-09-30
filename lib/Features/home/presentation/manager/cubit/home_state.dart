@@ -11,3 +11,5 @@ final class HomeNewArrival extends HomeStates {}
 final class HomeCategories extends HomeStates {}
 
 final class HomeBottomNavBar extends HomeStates {}
+
+final class HomeUserModel extends HomeStates {}

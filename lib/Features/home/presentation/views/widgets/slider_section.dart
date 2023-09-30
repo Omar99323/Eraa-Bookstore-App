@@ -27,7 +27,7 @@ class SliderSection extends StatelessWidget {
       options: CarouselOptions(
         height: 180,
         enableInfiniteScroll: true,
-        autoPlay: false,
+        autoPlay: true,
         enlargeCenterPage: true,
         scrollDirection: Axis.horizontal,
       ),

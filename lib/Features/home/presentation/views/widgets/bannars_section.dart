@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class BannarsSection extends StatelessWidget {
   const BannarsSection({
     super.key,
+    required this.bannarImages,
   });
+  final List<String> bannarImages;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +18,17 @@ class BannarsSection extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primaryswatch,
           borderRadius: BorderRadius.circular(15),
-          // image: DecorationImage(
-          //   image: NetworkImage(),
-          //   fit: BoxFit.cover,
-          // ),
+          image: DecorationImage(
+            image: NetworkImage(bannarImages[index]),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
       options: CarouselOptions(
         height: 200,
         viewportFraction: 1,
         enableInfiniteScroll: true,
-        autoPlay: false,
+        autoPlay: true,
         scrollDirection: Axis.horizontal,
       ),
     );

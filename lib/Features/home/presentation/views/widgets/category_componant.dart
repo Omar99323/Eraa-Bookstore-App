@@ -1,11 +1,14 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
+import 'package:book_store_eraa/Features/home/data/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class CategoryComponant extends StatelessWidget {
   const CategoryComponant({
     super.key,
+    required this.categoryModel,
   });
+  final CategoryModel categoryModel;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class CategoryComponant extends StatelessWidget {
             ),
           ),
           Text(
-            'Software',
+            categoryModel.name!,
             style: AppStyles.textStyle24w400.copyWith(
               color: AppColors.colorWhite,
               fontWeight: FontWeight.bold,
