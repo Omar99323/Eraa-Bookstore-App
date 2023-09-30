@@ -1,17 +1,16 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
-import 'package:book_store_eraa/Features/login/data/models/login_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
-    required this.scaffoldkey,
-    required this.userModel,
+    required this.scaffoldkey, required this.username, required this.userimage,
   });
 
   final GlobalKey<ScaffoldState> scaffoldkey;
-  final LoginUserModel userModel;
+  final String username;
+  final String userimage;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class HomeAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, ${userModel.user!.name!.split(' ')[0]}',
+              'Hi, ${username.split(' ')[0]}',
               style: AppStyles.textStyle24w400.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
@@ -52,7 +51,7 @@ class HomeAppBar extends StatelessWidget {
          CircleAvatar(
           radius: 30,
           backgroundColor: AppColors.primaryswatch,
-          backgroundImage: NetworkImage(userModel.user!.image!),
+          backgroundImage: NetworkImage(userimage),
           // child: Image.network(),
         ),
         const SizedBox(

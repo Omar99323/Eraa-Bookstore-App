@@ -6,7 +6,6 @@ import 'package:book_store_eraa/Features/home/presentation/views/widgets/categor
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/home_appbar.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/new_arrivals.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/slider_section.dart';
-import 'package:book_store_eraa/Features/login/data/models/login_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeBody extends StatelessWidget {
@@ -17,11 +16,13 @@ class HomeBody extends StatelessWidget {
     required this.bestSellerBooks,
     required this.newArrivalBooks,
     required this.categories,
-    required this.userModel,
+    required this.username,
+    required this.userimage,
   });
 
   final GlobalKey<ScaffoldState> scaffoldkey;
-  final LoginUserModel userModel;
+  final String username;
+  final String userimage;
   final List<String> slinderImages;
   final List<CategoryModel> categories;
   final List<BookModel> bestSellerBooks;
@@ -34,7 +35,8 @@ class HomeBody extends StatelessWidget {
       children: [
         HomeAppBar(
           scaffoldkey: scaffoldkey,
-          userModel: userModel,
+          username: username,
+          userimage: userimage,
         ),
         const SizedBox(height: 20),
         Expanded(

@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             mobileSnackBarPosition: MobileSnackBarPosition.top,
           ).show(context);
-          Navigator.pushReplacementNamed(context, HomePage.id,arguments: BlocProvider.of<LoginCubit>(context).userModel);
+          Navigator.pushReplacementNamed(context, HomePage.id);
         }
         if (state is LoginFailure) {
           AnimatedSnackBar.material(

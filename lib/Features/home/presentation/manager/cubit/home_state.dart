@@ -1,6 +1,7 @@
 abstract class HomeStates {}
 
 final class HomeInitial extends HomeStates {}
+final class HomeLogout extends HomeStates {}
 
 final class HomeSlinder extends HomeStates {}
 

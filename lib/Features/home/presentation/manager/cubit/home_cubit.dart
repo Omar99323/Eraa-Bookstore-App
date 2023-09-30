@@ -1,3 +1,4 @@
+// ignore_for_file: missing_required_param
 import 'package:book_store_eraa/Core/helpers/api.dart';
 import 'package:book_store_eraa/Core/helpers/secure_storage.dart';
 import 'package:book_store_eraa/Core/utils/endpoints.dart';
@@ -9,7 +10,6 @@ import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pag
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pages/cart_body.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pages/home_body.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pages/profile_body.dart';
-import 'package:book_store_eraa/Features/login/data/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,8 @@ class HomeCubit extends Cubit<HomeStates> {
   List<BookModel> listofNewArrival = [];
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
-  LoginUserModel? userModel;
+  String? username;
+  String? userimage;
   String? token;
   int navindex = 0;
 
@@ -30,8 +31,23 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeBottomNavBar());
   }
 
-  getUserModel(LoginUserModel model) {
-    userModel = model;
+  logout() async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+      url: EndPoints.baseUrl + EndPoints.logoutEndpoint,
+      token: token,
+    ).then((value) {
+      SecureStorage.deleteData(key: 'token');
+      SecureStorage.deleteData(key: 'username');
+      SecureStorage.deleteData(key: 'useremail');
+      SecureStorage.deleteData(key: 'userimage');
+      emit(HomeLogout());
+    });
+  }
+
+  getUserModel({required String name, required String image}) {
+    username = name;
+    userimage = image;
     emit(HomeUserModel());
   }
 
@@ -42,7 +58,8 @@ class HomeCubit extends Cubit<HomeStates> {
           bestSellerBooks: listofBestSeller,
           newArrivalBooks: listofNewArrival,
           categories: listofCategories,
-          userModel: userModel!,
+          username: username!,
+          userimage: userimage!,
         ),
         const BooksBody(),
         const FavoritesBody(),
