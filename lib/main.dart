@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Features/OnBoarding/presentation/views/first_on_boarding_screen.dart';
 import 'package:book_store_eraa/Features/OnBoarding/presentation/views/second_on_boarding_screen.dart';
 import 'package:book_store_eraa/Features/Splash/presentation/views/splash_screen.dart';
+import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:book_store_eraa/Features/login/presentation/views/login_screen.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => HomeCubit()..getSliders()..getBestSeller(),
+        ),
+        BlocProvider(
           create: (context) => LoginCubit(),
         ),
         BlocProvider(
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: AppColors.primaryswatch,
-          useMaterial3: true,
+          // useMaterial3: true,
         ),
         initialRoute: SplashScreen.id,
         routes: {
