@@ -4,6 +4,8 @@ import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Features/OnBoarding/presentation/views/first_on_boarding_screen.dart';
 import 'package:book_store_eraa/Features/OnBoarding/presentation/views/second_on_boarding_screen.dart';
 import 'package:book_store_eraa/Features/Splash/presentation/views/splash_screen.dart';
+import 'package:book_store_eraa/Features/book_details/presentation/manager/cubit/book_details_cubit.dart';
+import 'package:book_store_eraa/Features/book_details/presentation/views/book_details.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_cubit.dart';
@@ -46,6 +48,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => UpdateProfileCubit(),
         ),
+        BlocProvider(
+          create: (context) => BookDetailsCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -63,6 +68,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => const LoginScreen(),
           HomePage.id: (context) => const HomePage(),
           UpdateProfile.id: (context) => const UpdateProfile(),
+          BookDetails.id: (context) => const BookDetails(),
         },
       ),
     );

@@ -111,6 +111,7 @@ class HomeCubit extends Cubit<HomeStates> {
     });
     emit(HomeAllBooks());
   }
+  
 
   search({required String name}) async {
     searchBooks.clear();
