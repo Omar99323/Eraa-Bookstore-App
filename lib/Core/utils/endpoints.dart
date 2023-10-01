@@ -9,4 +9,6 @@ class EndPoints {
   static String categoriesEndpoint = '/categories';
   static String bestSellersEndpoint = '/products-bestseller';
   static String newArrivalsEndpoint = '/products-new-arrivals';
+  static String allBooksEndpoint = '/products';
+  static String searchEndpoint = '/products-search?name=';
 }

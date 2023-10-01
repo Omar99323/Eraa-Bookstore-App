@@ -18,12 +18,11 @@ class HomeBody extends StatelessWidget {
     required this.newArrivalBooks,
     required this.categories,
     required this.userModel,
-   
   });
 
   final GlobalKey<ScaffoldState> scaffoldkey;
   final UserModel userModel;
-  
+
   final List<String> slinderImages;
   final List<CategoryModel> categories;
   final List<BookModel> bestSellerBooks;
@@ -33,10 +32,7 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 10,
-        ),
+        padding: const EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

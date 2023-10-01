@@ -20,12 +20,23 @@ class HomeCubit extends Cubit<HomeStates> {
   GlobalKey<ScaffoldState> scaffoldkey = GlobalKey();
   List<BookModel> listofBestSeller = [];
   List<BookModel> listofNewArrival = [];
+  List<BookModel> allBooks = [];
+  List<BookModel> searchBooks = [];
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
   UserModel? userModel;
-
+  bool searching = false;
   String? token;
   int navindex = 0;
+
+  searchin() {
+    searching = true;
+    emit(HomeSearching());
+  }
+  endSearchin() {
+    searching = false;
+    emit(HomeSearching());
+  }
 
   changeIndex(int index) {
     navindex = index;
@@ -64,7 +75,10 @@ class HomeCubit extends Cubit<HomeStates> {
           categories: listofCategories,
           userModel: userModel!,
         ),
-        const BooksBody(),
+        BooksBody(
+          allBooks: allBooks,
+          searchBooks: searchBooks,
+        ),
         const FavoritesBody(),
         const CartBody(),
         ProfileBody(userModel: userModel!),
@@ -82,6 +96,35 @@ class HomeCubit extends Cubit<HomeStates> {
       }
     });
     emit(HomeSlinder());
+  }
+
+  getAllBooks() async {
+    allBooks.clear();
+    token = await SecureStorage.getData(key: 'token');
+    await Api.get(
+      url: EndPoints.baseUrl + EndPoints.allBooksEndpoint,
+      token: token,
+    ).then((value) {
+      for (var element in value['data']['products']) {
+        allBooks.add(BookModel.fromJson(element));
+      }
+    });
+    emit(HomeAllBooks());
+  }
+
+  search({required String name}) async {
+    searchBooks.clear();
+    emit(HomeSearchLoading());
+    token = await SecureStorage.getData(key: 'token');
+    await Api.get(
+      url: EndPoints.baseUrl + EndPoints.searchEndpoint + name,
+      token: token,
+    ).then((value) {
+      for (var element in value['data']['products']) {
+        searchBooks.add(BookModel.fromJson(element));
+      }
+    });
+    emit(HomeSearchSuccess());
   }
 
   getBestSeller() async {
