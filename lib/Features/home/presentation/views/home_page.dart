@@ -20,19 +20,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? name;
-  String? email;
-  String? image;
+  String? username;
+  String? useremail;
+  String? userimage;
+  String? userphone;
+  String? usercity;
+  String? useraddress;
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () async {
-      name = await SecureStorage.getData(key: 'username');
-      email = await SecureStorage.getData(key: 'useremail');
-      image = await SecureStorage.getData(key: 'userimage');
+      username = await SecureStorage.getData(key: 'username');
+      useremail = await SecureStorage.getData(key: 'useremail');
+      userimage = await SecureStorage.getData(key: 'userimage');
+      userphone = await SecureStorage.getData(key: 'userphone');
+      usercity = await SecureStorage.getData(key: 'usercity');
+      useraddress = await SecureStorage.getData(key: 'useraddress');
       BlocProvider.of<HomeCubit>(context).getUserModel(
-        name: name!,
-        image: image!,
+        name: username,
+        emai: useremail,
+        image: userimage,
+        phone: userphone,
+        city: usercity,
+        address: useraddress,
       );
     });
   }
@@ -52,12 +62,12 @@ class _HomePageState extends State<HomePage> {
         var homecbt = BlocProvider.of<HomeCubit>(context);
         return Scaffold(
           key: homecbt.scaffoldkey,
-          drawer: name == null || email == null || image == null
+          drawer: username == null || useremail == null || userimage == null
               ? const Drawer()
               : MyDrawer(
-                  name: name!,
-                  email: email!,
-                  image: image!,
+                  name: username!,
+                  email: useremail!,
+                  image: userimage!,
                 ),
           bottomNavigationBar: CurvedNavigationBar(
             index: homecbt.navindex,
@@ -104,22 +114,14 @@ class _HomePageState extends State<HomePage> {
               homecbt.changeIndex(index);
             },
           ),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 10,
-              ),
-              child: homecbt.slinderImgs.isEmpty ||
-                      homecbt.listofBestSeller.isEmpty ||
-                      homecbt.listofNewArrival.isEmpty ||
-                      homecbt.listofCategories.isEmpty
-                  ? const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    )
-                  : homecbt.screens()[homecbt.navindex],
-            ),
-          ),
+          body: homecbt.slinderImgs.isEmpty ||
+                  homecbt.listofBestSeller.isEmpty ||
+                  homecbt.listofNewArrival.isEmpty ||
+                  homecbt.listofCategories.isEmpty
+              ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+              : homecbt.screens()[homecbt.navindex],
         );
       },
     );

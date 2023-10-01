@@ -30,43 +30,51 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HomeAppBar(
-          scaffoldkey: scaffoldkey,
-          username: username,
-          userimage: userimage,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 10,
         ),
-        const SizedBox(height: 20),
-        Expanded(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                SliderSection(
-                  slinderImages: slinderImages,
-                ),
-                BestSellerSection(
-                  bestSellerBooks: bestSellerBooks,
-                ),
-                const SizedBox(height: 15),
-                BannarsSection(
-                  bannarImages: slinderImages,
-                ),
-                const SizedBox(height: 15),
-                CategoriesSection(
-                  categories: categories,
-                ),
-                const SizedBox(height: 15),
-                NewArrivalSection(
-                  newArrivalBooks: newArrivalBooks,
-                ),
-              ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HomeAppBar(
+              scaffoldkey: scaffoldkey,
+              username: username,
+              userimage: userimage,
             ),
-          ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    SliderSection(
+                      slinderImages: slinderImages,
+                    ),
+                    BestSellerSection(
+                      bestSellerBooks: bestSellerBooks,
+                    ),
+                    const SizedBox(height: 15),
+                    BannarsSection(
+                      bannarImages: slinderImages,
+                    ),
+                    const SizedBox(height: 15),
+                    CategoriesSection(
+                      categories: categories,
+                    ),
+                    const SizedBox(height: 15),
+                    NewArrivalSection(
+                      newArrivalBooks: newArrivalBooks,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

@@ -22,6 +22,10 @@ class HomeCubit extends Cubit<HomeStates> {
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
   String? username;
+  String? useremail;
+  String? usercity;
+  String? userphone;
+  String? useraddress;
   String? userimage;
   String? token;
   int navindex = 0;
@@ -45,9 +49,20 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  getUserModel({required String name, required String image}) {
+  getUserModel({
+    String? name,
+    String? image,
+    String? phone,
+    String? city,
+    String? address,
+    String? emai,
+  }) {
     username = name;
     userimage = image;
+    userphone = phone;
+    useremail = emai;
+    useraddress = address;
+    usercity = city;
     emit(HomeUserModel());
   }
 
@@ -64,7 +79,14 @@ class HomeCubit extends Cubit<HomeStates> {
         const BooksBody(),
         const FavoritesBody(),
         const CartBody(),
-        const ProfileBody(),
+        ProfileBody(
+          username: username!,
+          useremail: useremail!,
+          userimage: userimage!,
+          usercity: usercity,
+          userphone: userphone,
+          useraddress: useraddress,
+        ),
       ];
 
   getSliders() async {

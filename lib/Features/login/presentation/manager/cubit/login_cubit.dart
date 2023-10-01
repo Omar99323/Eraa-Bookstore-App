@@ -51,6 +51,9 @@ class LoginCubit extends Cubit<LoginStates> {
         SecureStorage.writeData(key: 'username', value: userModel!.user!.name);
         SecureStorage.writeData(key: 'useremail', value: userModel!.user!.email);
         SecureStorage.writeData(key: 'userimage', value: userModel!.user!.image);
+        SecureStorage.writeData(key: 'userphone', value: userModel!.user!.phone);
+        SecureStorage.writeData(key: 'usercity', value: userModel!.user!.city);
+        SecureStorage.writeData(key: 'useraddress', value: userModel!.user!.address);
         SecureStorage.writeData(key: 'token', value: userModel!.token);
         emit(LoginSuccess());
       }
