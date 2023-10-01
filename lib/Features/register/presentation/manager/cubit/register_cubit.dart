@@ -77,9 +77,6 @@ class RegisterCubit extends Cubit<RegisterStates> {
         emit(RegisterFailure(errmsg: 'The email has already been taken.'));
       } else {
         userModel = LoginUserModel.fromJson(value['data']);
-        SecureStorage.writeData(key: 'username', value: userModel!.user!.name);
-        SecureStorage.writeData(key: 'useremail', value: userModel!.user!.email);
-        SecureStorage.writeData(key: 'userimage', value: userModel!.user!.image);
         SecureStorage.writeData(key: 'token', value: userModel!.token);
         emit(RegisterSuccess());
       }

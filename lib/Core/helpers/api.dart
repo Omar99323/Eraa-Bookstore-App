@@ -69,7 +69,7 @@ class Api {
       Map<String, dynamic> data = jsonDecode(response.body);
       return data;
     } else if (response.statusCode == 422) {
-      return response.statusCode;
+      return response.body;
     } else {
       throw Exception(
           'There is a issue with the status code ${response.statusCode}');

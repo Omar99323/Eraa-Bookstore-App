@@ -1,5 +1,6 @@
 import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/data/models/category_model.dart';
+import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/bannars_section.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/best_seller_section.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/categories_section.dart';
@@ -16,13 +17,13 @@ class HomeBody extends StatelessWidget {
     required this.bestSellerBooks,
     required this.newArrivalBooks,
     required this.categories,
-    required this.username,
-    required this.userimage,
+    required this.userModel,
+   
   });
 
   final GlobalKey<ScaffoldState> scaffoldkey;
-  final String username;
-  final String userimage;
+  final UserModel userModel;
+  
   final List<String> slinderImages;
   final List<CategoryModel> categories;
   final List<BookModel> bestSellerBooks;
@@ -41,8 +42,8 @@ class HomeBody extends StatelessWidget {
           children: [
             HomeAppBar(
               scaffoldkey: scaffoldkey,
-              username: username,
-              userimage: userimage,
+              username: userModel.name!,
+              userimage: userModel.image!,
             ),
             const SizedBox(height: 20),
             Expanded(

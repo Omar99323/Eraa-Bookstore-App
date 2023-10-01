@@ -10,6 +10,8 @@ import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_
 import 'package:book_store_eraa/Features/login/presentation/views/login_screen.dart';
 import 'package:book_store_eraa/Features/register/presentation/manager/cubit/register_cubit.dart';
 import 'package:book_store_eraa/Features/register/presentation/views/register_screen.dart';
+import 'package:book_store_eraa/Features/update_profile/presentation/manager/cubit/update_profile_cubit.dart';
+import 'package:book_store_eraa/Features/update_profile/presentation/views/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,13 +33,16 @@ class MyApp extends StatelessWidget {
             ..getSliders()
             ..getBestSeller()
             ..getNewArrival()
-            ..getCategories(),
+            ..getCategories()..getUserModel(),
         ),
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UpdateProfileCubit(),
         ),
       ],
       child: MaterialApp(
@@ -55,6 +60,7 @@ class MyApp extends StatelessWidget {
           RegisterScreen.id: (context) => const RegisterScreen(),
           LoginScreen.id: (context) => const LoginScreen(),
           HomePage.id: (context) => const HomePage(),
+          UpdateProfile.id: (context) => const UpdateProfile(),
         },
       ),
     );

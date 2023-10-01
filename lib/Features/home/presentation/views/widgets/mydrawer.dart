@@ -1,18 +1,15 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
+import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:book_store_eraa/Features/update_profile/presentation/views/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyDrawer extends StatelessWidget {
-  const MyDrawer(
-      {super.key,
-      required this.name,
-      required this.email,
-      required this.image});
-  final String name;
-  final String email;
-  final String image;
+  const MyDrawer({super.key, required this.userModel});
+
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +22,10 @@ class MyDrawer extends StatelessWidget {
             ),
             currentAccountPicture: CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(image),
+              backgroundImage: NetworkImage(userModel.image!),
             ),
             accountName: Text(
-              name,
+              userModel.name!,
               style: AppStyles.textStyle24w400.copyWith(
                 color: AppColors.colorWhite,
                 fontWeight: FontWeight.bold,
@@ -36,7 +33,7 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             accountEmail: Text(
-              email,
+              userModel.email!,
               style: AppStyles.textStyle24w400.copyWith(
                 color: AppColors.colorWhite,
                 fontSize: 14,
@@ -73,7 +70,9 @@ class MyDrawer extends StatelessWidget {
                     thickness: 2, color: AppColors.colorBlack.withOpacity(0.3)),
                 const SizedBox(height: 20),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, UpdateProfile.id);
+                  },
                   child: Row(
                     children: [
                       Icon(

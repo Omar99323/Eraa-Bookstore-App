@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Core/helpers/secure_storage.dart';
 import 'package:book_store_eraa/Core/utils/endpoints.dart';
 import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/data/models/category_model.dart';
+import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pages/Favorites_body.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/nav_pages/books_body.dart';
@@ -21,12 +22,8 @@ class HomeCubit extends Cubit<HomeStates> {
   List<BookModel> listofNewArrival = [];
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
-  String? username;
-  String? useremail;
-  String? usercity;
-  String? userphone;
-  String? useraddress;
-  String? userimage;
+  UserModel? userModel;
+
   String? token;
   int navindex = 0;
 
@@ -42,27 +39,19 @@ class HomeCubit extends Cubit<HomeStates> {
       token: token,
     ).then((value) {
       SecureStorage.deleteData(key: 'token');
-      SecureStorage.deleteData(key: 'username');
-      SecureStorage.deleteData(key: 'useremail');
-      SecureStorage.deleteData(key: 'userimage');
       emit(HomeLogout());
     });
   }
 
-  getUserModel({
-    String? name,
-    String? image,
-    String? phone,
-    String? city,
-    String? address,
-    String? emai,
-  }) {
-    username = name;
-    userimage = image;
-    userphone = phone;
-    useremail = emai;
-    useraddress = address;
-    usercity = city;
+  getUserModel() async {
+    userModel == null;
+    token = await SecureStorage.getData(key: 'token');
+    await Api.get(
+      url: EndPoints.baseUrl + EndPoints.userProfileEndpoint,
+      token: token,
+    ).then((value) {
+      userModel = UserModel.fromJson(value['data']);
+    });
     emit(HomeUserModel());
   }
 
@@ -73,20 +62,12 @@ class HomeCubit extends Cubit<HomeStates> {
           bestSellerBooks: listofBestSeller,
           newArrivalBooks: listofNewArrival,
           categories: listofCategories,
-          username: username!,
-          userimage: userimage!,
+          userModel: userModel!,
         ),
         const BooksBody(),
         const FavoritesBody(),
         const CartBody(),
-        ProfileBody(
-          username: username!,
-          useremail: useremail!,
-          userimage: userimage!,
-          usercity: usercity,
-          userphone: userphone,
-          useraddress: useraddress,
-        ),
+        ProfileBody(userModel: userModel!),
       ];
 
   getSliders() async {

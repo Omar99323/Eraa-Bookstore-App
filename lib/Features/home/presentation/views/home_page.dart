@@ -1,7 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:book_store_eraa/Core/helpers/secure_storage.dart';
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
@@ -20,33 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? username;
-  String? useremail;
-  String? userimage;
-  String? userphone;
-  String? usercity;
-  String? useraddress;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () async {
-      username = await SecureStorage.getData(key: 'username');
-      useremail = await SecureStorage.getData(key: 'useremail');
-      userimage = await SecureStorage.getData(key: 'userimage');
-      userphone = await SecureStorage.getData(key: 'userphone');
-      usercity = await SecureStorage.getData(key: 'usercity');
-      useraddress = await SecureStorage.getData(key: 'useraddress');
-      BlocProvider.of<HomeCubit>(context).getUserModel(
-        name: username,
-        emai: useremail,
-        image: userimage,
-        phone: userphone,
-        city: usercity,
-        address: useraddress,
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
@@ -62,13 +32,9 @@ class _HomePageState extends State<HomePage> {
         var homecbt = BlocProvider.of<HomeCubit>(context);
         return Scaffold(
           key: homecbt.scaffoldkey,
-          drawer: username == null || useremail == null || userimage == null
+          drawer: homecbt.userModel == null
               ? const Drawer()
-              : MyDrawer(
-                  name: username!,
-                  email: useremail!,
-                  image: userimage!,
-                ),
+              : MyDrawer(userModel: homecbt.userModel!),
           bottomNavigationBar: CurvedNavigationBar(
             index: homecbt.navindex,
             height: 50,
@@ -117,7 +83,8 @@ class _HomePageState extends State<HomePage> {
           body: homecbt.slinderImgs.isEmpty ||
                   homecbt.listofBestSeller.isEmpty ||
                   homecbt.listofNewArrival.isEmpty ||
-                  homecbt.listofCategories.isEmpty
+                  homecbt.listofCategories.isEmpty ||
+                  homecbt.userModel == null
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )

@@ -12,39 +12,45 @@ class CustomFormField extends StatelessWidget {
     this.prefixicon,
     this.validator,
     this.initvalue,
-    this.enabled,
+    this.disenabled = false,
+    this.autofocus = false,
     this.label,
+    this.onchange,
   });
 
   final TextEditingController? controller;
   final TextInputType? inputType;
   final bool obscuretext;
-  final bool? enabled;
+  final bool disenabled;
+  final bool autofocus;
   final String? hinttext;
   final String? label;
   final String? initvalue;
   final Icon? prefixicon;
   final String? Function(String?)? validator;
+  final Function(String)? onchange;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       initialValue: initvalue,
-      enabled: enabled,
+      autofocus:autofocus ,
+      readOnly: disenabled,
       obscureText: obscuretext,
       keyboardType: inputType,
+      onChanged: onchange,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(15),
         prefixIcon: prefixicon,
         hintStyle: AppStyles.textStyle34w900.copyWith(
           fontSize: 20,
         ),
+        
         labelStyle: AppStyles.textStyle34w900.copyWith(
           fontSize: 14,
           fontWeight: FontWeight.normal,
         ),
-        
         labelText: label,
         hintText: hinttext,
         focusedBorder: const OutlineInputBorder(
