@@ -2,6 +2,7 @@ import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/book_details/presentation/manager/cubit/book_details_cubit.dart';
 import 'package:book_store_eraa/Features/book_details/presentation/manager/cubit/book_details_state.dart';
+import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_button/like_button.dart';
@@ -15,6 +16,7 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
+  bool isliked = false;
   @override
   void initState() {
     super.initState();
@@ -84,6 +86,7 @@ class _BookDetailsState extends State<BookDetails> {
                                             dotSecondaryColor:
                                                 AppColors.primaryswatch,
                                           ),
+                                          isLiked: isliked,
                                           likeBuilder: (isLiked) {
                                             if (isLiked) {
                                               return const Icon(
@@ -97,6 +100,29 @@ class _BookDetailsState extends State<BookDetails> {
                                                 size: 50,
                                                 color: AppColors.primaryswatch,
                                               );
+                                            }
+                                          },
+                                          onTap: (isLiked) {
+                                            if (isLiked) {
+                                              BlocProvider.of<HomeCubit>(
+                                                      context)
+                                                  .removeFromWish(
+                                                      id: bookcbt.bookModel!.id
+                                                          .toString());
+                                              setState(() {
+                                                isliked = false;
+                                              });
+                                              return Future(() => isLiked);
+                                            } else {
+                                              BlocProvider.of<HomeCubit>(
+                                                      context)
+                                                  .addToWish(
+                                                      id: bookcbt.bookModel!.id
+                                                          .toString());
+                                              setState(() {
+                                                isliked = true;
+                                              });
+                                              return Future(() => isLiked);
                                             }
                                           },
                                         ),

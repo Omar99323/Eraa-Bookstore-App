@@ -10,6 +10,9 @@ class EndPoints {
   static String bestSellersEndpoint = '/products-bestseller';
   static String newArrivalsEndpoint = '/products-new-arrivals';
   static String allBooksEndpoint = '/products';
+  static String wishlistEndpoint = '/wishlist';
+  static String addTowishlistEndpoint = '/add-to-wishlist';
+  static String removeFromwishlistEndpoint = '/remove-from-wishlist';
   static String bookDetailsEndpoint = '/products/';
   static String searchEndpoint = '/products-search?name=';
 }

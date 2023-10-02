@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
             ..getNewArrival()
             ..getCategories()
             ..getUserModel()
-            ..getAllBooks(),
+            ..getAllBooks()
+            ..wishListBooks(),
         ),
         BlocProvider(
           create: (context) => LoginCubit(),

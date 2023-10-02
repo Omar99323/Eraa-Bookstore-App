@@ -22,6 +22,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List<BookModel> listofNewArrival = [];
   List<BookModel> allBooks = [];
   List<BookModel> searchBooks = [];
+  List<BookModel> wishlistBooks = [];
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
   UserModel? userModel;
@@ -33,8 +34,10 @@ class HomeCubit extends Cubit<HomeStates> {
     searching = true;
     emit(HomeSearching());
   }
+
   endSearchin() {
     searching = false;
+
     emit(HomeSearching());
   }
 
@@ -52,6 +55,28 @@ class HomeCubit extends Cubit<HomeStates> {
       SecureStorage.deleteData(key: 'token');
       emit(HomeLogout());
     });
+  }
+
+  addToWish({required String id}) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.addTowishlistEndpoint,
+        token: token,
+        body: {
+          'product_id': id,
+        }).then((value) {});
+    emit(HomeAddToWishList());
+  }
+
+  removeFromWish({required String id}) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.removeFromwishlistEndpoint,
+        token: token,
+        body: {
+          'product_id': id,
+        }).then((value) {});
+    emit(HomeRemoveFromWishList());
   }
 
   getUserModel() async {
@@ -78,8 +103,12 @@ class HomeCubit extends Cubit<HomeStates> {
         BooksBody(
           allBooks: allBooks,
           searchBooks: searchBooks,
+          wishBooks: wishlistBooks,
+          // wishids: wishids,
         ),
-        const FavoritesBody(),
+        FavoritesBody(
+          wishlistBooks: wishlistBooks,
+        ),
         const CartBody(),
         ProfileBody(userModel: userModel!),
       ];
@@ -111,7 +140,20 @@ class HomeCubit extends Cubit<HomeStates> {
     });
     emit(HomeAllBooks());
   }
-  
+
+  wishListBooks() async {
+    wishlistBooks.clear();
+    token = await SecureStorage.getData(key: 'token');
+    await Api.get(
+      url: EndPoints.baseUrl + EndPoints.wishlistEndpoint,
+      token: token,
+    ).then((value) {
+      for (var element in value['data']['data']) {
+        wishlistBooks.add(BookModel.fromJson(element));
+      }
+    });
+    emit(HomeWishListBooks());
+  }
 
   search({required String name}) async {
     searchBooks.clear();

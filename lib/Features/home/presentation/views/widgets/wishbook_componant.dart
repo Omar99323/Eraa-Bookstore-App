@@ -7,36 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_button/like_button.dart';
 
-class BookComponant extends StatefulWidget {
-  const BookComponant(
-      {super.key, required this.bookModel, required this.wishids});
+class WishBookComponant extends StatelessWidget {
+  const WishBookComponant({super.key, required this.bookModel});
+
   final BookModel bookModel;
-  final List<int> wishids;
-
-  @override
-  State<BookComponant> createState() => _BookComponantState();
-}
-
-class _BookComponantState extends State<BookComponant> {
-  bool isliked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    for (var id in widget.wishids) {
-      if (widget.bookModel.id == id) {
-        setState(() {
-          isliked = true;
-        });
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    double discountprice = double.parse(bookModel.price!) -
+        (double.parse(bookModel.price!) * (bookModel.discount! / 100));
+
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, BookDetails.id,
-          arguments: widget.bookModel.id.toString()),
+          arguments: bookModel.id.toString()),
       child: Container(
         height: 200,
         padding: const EdgeInsets.all(15),
@@ -48,7 +31,7 @@ class _BookComponantState extends State<BookComponant> {
           children: [
             Stack(
               children: [
-                if (widget.bookModel.image != null)
+                if (bookModel.image != null)
                   Container(
                     height: 200,
                     width: 110,
@@ -56,7 +39,7 @@ class _BookComponantState extends State<BookComponant> {
                       borderRadius: BorderRadius.circular(10),
                       color: AppColors.colorBlack,
                       image: DecorationImage(
-                        image: NetworkImage(widget.bookModel.image!),
+                        image: NetworkImage(bookModel.image!),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -72,7 +55,7 @@ class _BookComponantState extends State<BookComponant> {
                     ),
                     child: Center(
                       child: Text(
-                        "${widget.bookModel.discount!.toString()}%",
+                        "${bookModel.discount!.toString()}%",
                         style: AppStyles.textStyle24w400.copyWith(
                           color: AppColors.colorWhite,
                           fontSize: 14,
@@ -92,7 +75,7 @@ class _BookComponantState extends State<BookComponant> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.bookModel.name!,
+                    bookModel.name!,
                     style: AppStyles.textStyle24w400.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -104,7 +87,7 @@ class _BookComponantState extends State<BookComponant> {
                     height: 10,
                   ),
                   Text(
-                    widget.bookModel.category!,
+                    bookModel.category!,
                     style: AppStyles.textStyle24w400.copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -117,7 +100,7 @@ class _BookComponantState extends State<BookComponant> {
                     height: 10,
                   ),
                   Text(
-                    "${widget.bookModel.price!} L.E",
+                    "${bookModel.price!} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
                       fontSize: 13,
@@ -129,7 +112,7 @@ class _BookComponantState extends State<BookComponant> {
                     height: 10,
                   ),
                   Text(
-                    "${widget.bookModel.priceAfterDiscount!.toString()} L.E",
+                    "${discountprice.toStringAsFixed(1).toString()} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
                       fontSize: 14,
@@ -151,7 +134,7 @@ class _BookComponantState extends State<BookComponant> {
                     dotPrimaryColor: AppColors.primaryswatch,
                     dotSecondaryColor: AppColors.primaryswatch,
                   ),
-                  isLiked: isliked,
+                  isLiked: true,
                   likeBuilder: (isLiked) {
                     if (isLiked) {
                       return const Icon(
@@ -170,17 +153,9 @@ class _BookComponantState extends State<BookComponant> {
                   onTap: (isLiked) {
                     if (isLiked) {
                       BlocProvider.of<HomeCubit>(context)
-                          .removeFromWish(id: widget.bookModel.id.toString());
-                      setState(() {
-                        isliked = false;
-                      });
+                          .removeFromWish(id: bookModel.id.toString());
                       return Future(() => isLiked);
                     } else {
-                      BlocProvider.of<HomeCubit>(context)
-                          .addToWish(id: widget.bookModel.id.toString());
-                      setState(() {
-                        isliked = true;
-                      });
                       return Future(() => isLiked);
                     }
                   },

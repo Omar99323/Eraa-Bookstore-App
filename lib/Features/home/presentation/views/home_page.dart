@@ -27,6 +27,9 @@ class _HomePageState extends State<HomePage> {
                   type: AnimatedSnackBarType.success)
               .show(context);
         }
+        if (state is HomeAddToWishList || state is HomeRemoveFromWishList) {
+          BlocProvider.of<HomeCubit>(context).wishListBooks();
+        }
       },
       builder: (context, state) {
         var homecbt = BlocProvider.of<HomeCubit>(context);

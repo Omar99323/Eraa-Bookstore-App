@@ -5,15 +5,49 @@ import 'package:book_store_eraa/Features/home/presentation/views/widgets/book_co
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BooksBody extends StatelessWidget {
+class BooksBody extends StatefulWidget {
   const BooksBody(
-      {super.key, required this.allBooks, required this.searchBooks});
+      {super.key,
+      required this.allBooks,
+      required this.searchBooks,
+      required this.wishBooks});
 
   final List<BookModel> allBooks;
   final List<BookModel> searchBooks;
+  final List<BookModel> wishBooks;
+
+  @override
+  State<BooksBody> createState() => _BooksBodyState();
+}
+
+class _BooksBodyState extends State<BooksBody> {
+  List<int> wishids = [];
+  @override
+  void initState() {
+    super.initState();
+    for (var book in widget.allBooks) {
+      for (var wishBook in widget.wishBooks) {
+        if (book.id == wishBook.id) {
+          wishids.add(wishBook.id!);
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.searchBooks.isNotEmpty) {
+      wishids.clear();
+      for (var book in widget.searchBooks) {
+        for (var wishBook in widget.wishBooks) {
+          if (book.id == wishBook.id) {
+            setState(() {
+              wishids.add(book.id!);
+            });
+          }
+        }
+      }
+    }
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -64,20 +98,24 @@ class BooksBody extends StatelessWidget {
                 : Expanded(
                     child: ListView.separated(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: searchBooks.isEmpty
-                          ? allBooks.length
-                          : searchBooks.length,
-                      itemBuilder: (context, index) => searchBooks.isEmpty
-                          ? BookComponant(
-                              bookModel: allBooks[index],
-                            )
-                          : searchBooks.length == 1
+                      itemCount: widget.searchBooks.isEmpty
+                          ? widget.allBooks.length
+                          : widget.searchBooks.length,
+                      itemBuilder: (context, index) =>
+                          widget.searchBooks.isEmpty
                               ? BookComponant(
-                                  bookModel: searchBooks[0],
+                                  bookModel: widget.allBooks[index],
+                                  wishids: wishids,
                                 )
-                              : BookComponant(
-                                  bookModel: searchBooks[index],
-                                ),
+                              : widget.searchBooks.length == 1
+                                  ? BookComponant(
+                                      bookModel: widget.searchBooks[0],
+                                      wishids: wishids,
+                                    )
+                                  : BookComponant(
+                                      bookModel: widget.searchBooks[index],
+                                      wishids: wishids,
+                                    ),
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 20),
                     ),
