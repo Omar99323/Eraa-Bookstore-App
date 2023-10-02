@@ -3,6 +3,7 @@ import 'package:book_store_eraa/Core/helpers/api.dart';
 import 'package:book_store_eraa/Core/helpers/secure_storage.dart';
 import 'package:book_store_eraa/Core/utils/endpoints.dart';
 import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
+import 'package:book_store_eraa/Features/home/data/models/cart_model.dart';
 import 'package:book_store_eraa/Features/home/data/models/category_model.dart';
 import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
@@ -23,9 +24,11 @@ class HomeCubit extends Cubit<HomeStates> {
   List<BookModel> allBooks = [];
   List<BookModel> searchBooks = [];
   List<BookModel> wishlistBooks = [];
+  List<CartItems> cartBooks = [];
   List<String> slinderImgs = [];
   List<CategoryModel> listofCategories = [];
   UserModel? userModel;
+  CartModel? cartModel;
   bool searching = false;
   String? token;
   int navindex = 0;
@@ -66,6 +69,43 @@ class HomeCubit extends Cubit<HomeStates> {
           'product_id': id,
         }).then((value) {});
     emit(HomeAddToWishList());
+  }
+
+  addToCart({required String id}) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.addToCartEndpoint,
+        token: token,
+        body: {
+          'product_id': id,
+        }).then((value) {});
+    emit(HomeAddToCart());
+  }
+
+  removeFromCart({required String id}) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.removeFromCartEndpoint,
+        token: token,
+        body: {
+          'cart_item_id': id,
+        }).then((value) {});
+    emit(HomeRemoveFromCart());
+  }
+
+  updateCart({
+    required String id,
+    required String quantity,
+  }) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.updateCartEndpoint,
+        token: token,
+        body: {
+          'cart_item_id': id,
+          'quantity': quantity,
+        }).then((value) {});
+    emit(HomeUpdateCart());
   }
 
   removeFromWish({required String id}) async {
@@ -109,7 +149,10 @@ class HomeCubit extends Cubit<HomeStates> {
         FavoritesBody(
           wishlistBooks: wishlistBooks,
         ),
-        const CartBody(),
+        CartBody(
+          cartbooks: cartBooks,
+          cartModel: cartModel!,
+        ),
         ProfileBody(userModel: userModel!),
       ];
 
@@ -139,6 +182,21 @@ class HomeCubit extends Cubit<HomeStates> {
       }
     });
     emit(HomeAllBooks());
+  }
+
+  cartbooks() async {
+    cartBooks.clear();
+    token = await SecureStorage.getData(key: 'token');
+    await Api.get(
+      url: EndPoints.baseUrl + EndPoints.cartEndpoint,
+      token: token,
+    ).then((value) {
+      cartModel = CartModel.fromJson(value['data']);
+      for (var element in value['data']['cart_items']) {
+        cartBooks.add(CartItems.fromJson(element));
+      }
+    });
+    emit(HomeCartBooks());
   }
 
   wishListBooks() async {

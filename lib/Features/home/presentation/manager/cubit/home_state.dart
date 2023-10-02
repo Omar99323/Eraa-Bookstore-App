@@ -8,9 +8,17 @@ final class HomeSlinder extends HomeStates {}
 
 final class HomeAllBooks extends HomeStates {}
 
+final class HomeCartBooks extends HomeStates {}
+
 final class HomeWishListBooks extends HomeStates {}
 
 final class HomeAddToWishList extends HomeStates {}
+
+final class HomeAddToCart extends HomeStates {}
+
+final class HomeUpdateCart extends HomeStates {}
+
+final class HomeRemoveFromCart extends HomeStates {}
 
 final class HomeRemoveFromWishList extends HomeStates {}
 

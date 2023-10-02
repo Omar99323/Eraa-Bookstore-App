@@ -11,8 +11,14 @@ class EndPoints {
   static String newArrivalsEndpoint = '/products-new-arrivals';
   static String allBooksEndpoint = '/products';
   static String wishlistEndpoint = '/wishlist';
+  static String cartEndpoint = '/cart';
+  static String getCitiesEndpoint = '/governorates';
+  static String addToCartEndpoint = '/add-to-cart';
+  static String updateCartEndpoint = '/update-cart';
+  static String removeFromCartEndpoint = '/remove-from-cart';
   static String addTowishlistEndpoint = '/add-to-wishlist';
   static String removeFromwishlistEndpoint = '/remove-from-wishlist';
   static String bookDetailsEndpoint = '/products/';
   static String searchEndpoint = '/products-search?name=';
+  static String checkoutEndpoint = '/checkout';
 }

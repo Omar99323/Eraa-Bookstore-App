@@ -217,7 +217,10 @@ class _BookDetailsState extends State<BookDetails> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(26),
                                 )),
-                            onPressed: () {},
+                            onPressed: () {
+                              BlocProvider.of<HomeCubit>(context)
+                                  .addToCart(id: bookcbt.bookModel!.id!.toString());
+                            },
                             child: Text(
                               "Add To Cart",
                               textAlign: TextAlign.center,

@@ -186,7 +186,10 @@ class _BookComponantState extends State<BookComponant> {
                   },
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    BlocProvider.of<HomeCubit>(context)
+                        .addToCart(id: widget.bookModel.id!.toString());
+                  },
                   child: const Icon(
                     Icons.add_shopping_cart,
                     size: 30,

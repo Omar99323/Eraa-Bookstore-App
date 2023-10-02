@@ -161,7 +161,10 @@ class WishBookComponant extends StatelessWidget {
                   },
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    BlocProvider.of<HomeCubit>(context)
+                        .addToCart(id: bookModel.id!.toString());
+                  },
                   child: const Icon(
                     Icons.add_shopping_cart,
                     size: 30,

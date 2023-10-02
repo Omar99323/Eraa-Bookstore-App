@@ -35,18 +35,17 @@ class CustomFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       initialValue: initvalue,
-      autofocus:autofocus ,
+      autofocus: autofocus,
       readOnly: disenabled,
       obscureText: obscuretext,
       keyboardType: inputType,
       onChanged: onchange,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(15),
         prefixIcon: prefixicon,
         hintStyle: AppStyles.textStyle34w900.copyWith(
           fontSize: 20,
         ),
-        
+
         labelStyle: AppStyles.textStyle34w900.copyWith(
           fontSize: 14,
           fontWeight: FontWeight.normal,
