@@ -36,4 +36,25 @@ class CheckOutCubit extends Cubit<CheckOutState> {
     });
     emit(GetCities());
   }
+
+  makeOrder({
+    required String name,
+    required String cityID,
+    required String phone,
+    required String email,
+    required String address,
+  }) async {
+    token = await SecureStorage.getData(key: 'token');
+    await Api.post(
+        url: EndPoints.baseUrl + EndPoints.makeOrderEndpoint,
+        token: token,
+        body: {
+          'name': name,
+          'governorate_id': cityID,
+          'phone': phone,
+          'address': address,
+          'email': email,
+        }).then((value) {});
+    emit(MakeAnOrder());
+  }
 }

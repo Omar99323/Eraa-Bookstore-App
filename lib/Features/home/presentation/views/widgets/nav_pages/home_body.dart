@@ -53,7 +53,7 @@ class HomeBody extends StatelessWidget {
                     BestSellerSection(
                       bestSellerBooks: bestSellerBooks,
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 5),
                     BannarsSection(
                       bannarImages: slinderImages,
                     ),

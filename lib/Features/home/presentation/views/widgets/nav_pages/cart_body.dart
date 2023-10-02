@@ -25,6 +25,7 @@ class _CartBodyState extends State<CartBody> {
           children: [
             Expanded(
               child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 itemCount:
                     widget.cartbooks.isEmpty ? 1 : widget.cartbooks.length,
                 separatorBuilder: (context, index) =>
@@ -43,6 +44,7 @@ class _CartBodyState extends State<CartBody> {
                         : CartItem(book: widget.cartbooks[index]),
               ),
             ),
+            const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(10),
               height: 80,
@@ -53,7 +55,7 @@ class _CartBodyState extends State<CartBody> {
               child: Row(
                 children: [
                   Text(
-                    'Total price :  ${widget.cartModel.total} L.E',
+                    'Total price :  ${widget.cartModel.total ?? 0.0} L.E',
                     style: AppStyles.textStyle24w400.copyWith(
                       fontSize: 16,
                       color: AppColors.colorWhite,
@@ -91,146 +93,4 @@ class _CartBodyState extends State<CartBody> {
       ),
     );
   }
-
-  // Stack cartIItem({required CartItems book, required int quantity}) {
-  //   return Stack(
-  //     alignment: Alignment.topRight,
-  //     children: [
-  //       Container(
-  //         height: 200,
-  //         padding: const EdgeInsets.all(15),
-  //         decoration: BoxDecoration(
-  //           border: Border.all(width: 1, color: Colors.grey),
-  //           borderRadius: BorderRadius.circular(15),
-  //         ),
-  //         child: Row(
-  //           children: [
-  //             Container(
-  //               height: 200,
-  //               width: 110,
-  //               decoration: BoxDecoration(
-  //                 borderRadius: BorderRadius.circular(10),
-  //                 color: AppColors.colorBlack,
-  //                 image: DecorationImage(
-  //                   image: NetworkImage(book.itemProductImage!),
-  //                   fit: BoxFit.fill,
-  //                 ),
-  //               ),
-  //             ),
-  //             const SizedBox(
-  //               width: 20,
-  //             ),
-  //             Expanded(
-  //               child: Column(
-  //                 mainAxisAlignment: MainAxisAlignment.center,
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     book.itemProductName!,
-  //                     style: AppStyles.textStyle24w400.copyWith(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                     maxLines: 2,
-  //                     overflow: TextOverflow.ellipsis,
-  //                   ),
-  //                   const SizedBox(
-  //                     height: 30,
-  //                   ),
-  //                   Row(
-  //                     children: [
-  //                       Container(
-  //                         decoration: BoxDecoration(
-  //                           border: Border.all(width: 1, color: Colors.grey),
-  //                         ),
-  //                         child: Row(
-  //                           children: [
-  //                             IconButton(
-  //                               onPressed: () {
-  //                                 setState(() {
-  //                                   if (quantity < 10) {
-  //                                     ++quantity;
-  //                                     BlocProvider.of<HomeCubit>(context)
-  //                                         .updateCart(
-  //                                             id: book.itemId!.toString(),
-  //                                             quantity: quantity.toString());
-  //                                     print(quantity);
-  //                                   }
-  //                                 });
-  //                               },
-  //                               icon: const Icon(
-  //                                 Icons.add,
-  //                                 color: AppColors.primaryswatch,
-  //                               ),
-  //                             ),
-  //                             Text(book.itemQuantity.toString()),
-  //                             IconButton(
-  //                               onPressed: () {
-  //                                 setState(() {
-  //                                   if (quantity > 1) {
-  //                                     --quantity;
-  //                                     BlocProvider.of<HomeCubit>(context)
-  //                                         .updateCart(
-  //                                             id: book.itemId!.toString(),
-  //                                             quantity: quantity.toString());
-  //                                     print(quantity);
-  //                                   }
-  //                                 });
-  //                               },
-  //                               icon: const Icon(
-  //                                 Icons.remove,
-  //                                 color: AppColors.primaryswatch,
-  //                               ),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                       const Spacer(),
-  //                       Column(
-  //                         children: [
-  //                           Text(
-  //                             "${book.itemProductPrice} L.E",
-  //                             textAlign: TextAlign.center,
-  //                             style: AppStyles.textStyle24w400.copyWith(
-  //                               fontSize: 13,
-  //                               color: AppColors.colorBlack.withOpacity(0.3),
-  //                               decoration: TextDecoration.lineThrough,
-  //                             ),
-  //                           ),
-  //                           Text(
-  //                             "${book.itemProductPriceAfterDiscount} L.E",
-  //                             textAlign: TextAlign.center,
-  //                             style: AppStyles.textStyle24w400.copyWith(
-  //                               fontSize: 14,
-  //                               color: AppColors.primaryswatch,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       Padding(
-  //         padding: const EdgeInsets.all(10),
-  //         child: GestureDetector(
-  //           onTap: () {
-  //             BlocProvider.of<HomeCubit>(context)
-  //                 .removeFromCart(id: book.itemId!.toString());
-  //           },
-  //           child: const Icon(
-  //             Icons.delete,
-  //             color: Colors.red,
-  //             size: 30,
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-
-  // }
 }

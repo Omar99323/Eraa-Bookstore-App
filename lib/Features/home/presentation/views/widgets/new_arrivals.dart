@@ -10,31 +10,21 @@ class NewArrivalSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'New Arrival',
-              style: AppStyles.textStyle24w400.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_right_alt_sharp,
-                size: 30,
-              ),
-            ),
-          ],
+        const SizedBox(height: 20),
+        Text(
+          'New Arrival',
+          style: AppStyles.textStyle24w400.copyWith(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         SizedBox(
-          height: 350,
+          height: 330,
           child: ListView.separated(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,

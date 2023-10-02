@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Core/widgets/custom_form_field.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/update_profile/presentation/manager/cubit/update_profile_cubit.dart';
 import 'package:book_store_eraa/Features/update_profile/presentation/manager/cubit/update_profile_state.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
             mobileSnackBarPosition: MobileSnackBarPosition.top,
           ).show(context);
-          Navigator.pop(context);
+          Navigator.pushNamed(context, HomePage.id);
           homeCubit!.getUserModel();
         }
       },
