@@ -5,6 +5,7 @@ import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:like_button/like_button.dart';
 
 class BookComponant extends StatefulWidget {
@@ -38,10 +39,10 @@ class _BookComponantState extends State<BookComponant> {
       onTap: () => Navigator.pushNamed(context, BookDetails.id,
           arguments: widget.bookModel.id.toString()),
       child: Container(
-        height: 200,
-        padding: const EdgeInsets.all(15),
+        height: 170.h,
+        padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.grey),
+          border: Border.all(width: 1.w, color: Colors.grey),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
@@ -50,10 +51,9 @@ class _BookComponantState extends State<BookComponant> {
               children: [
                 if (widget.bookModel.image != null)
                   Container(
-                    height: 200,
-                    width: 110,
+                    width: 100.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       color: AppColors.colorBlack,
                       image: DecorationImage(
                         image: NetworkImage(widget.bookModel.image!),
@@ -62,12 +62,12 @@ class _BookComponantState extends State<BookComponant> {
                     ),
                   ),
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(6.r),
                   child: Container(
-                    width: 50,
-                    height: 35,
+                    width: 48.w,
+                    height: 30.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(7.r),
                       color: AppColors.primaryswatch,
                     ),
                     child: Center(
@@ -75,7 +75,7 @@ class _BookComponantState extends State<BookComponant> {
                         "${widget.bookModel.discount!.toString()}%",
                         style: AppStyles.textStyle24w400.copyWith(
                           color: AppColors.colorWhite,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
@@ -83,56 +83,56 @@ class _BookComponantState extends State<BookComponant> {
                 ),
               ],
             ),
-            const SizedBox(
-              width: 20,
+            SizedBox(
+              width: 15.w,
             ),
             SizedBox(
-              width: 170,
+              width: 150.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.bookModel.name!,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     widget.bookModel.category!,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.colorBlack.withOpacity(0.3),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     "${widget.bookModel.price!} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       color: AppColors.colorBlack.withOpacity(0.3),
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     "${widget.bookModel.priceAfterDiscount!.toString()} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.primaryswatch,
                     ),
                   ),

@@ -11,6 +11,7 @@ class OrderHistoryCubit extends Cubit<OrderHistoryState> {
   String? token;
 
   orderHistory() async {
+    orders.clear();
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.orderHistoryEndpoint,

@@ -7,6 +7,7 @@ import 'package:book_store_eraa/Features/login/presentation/views/login_screen.d
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               : MyDrawer(userModel: homecbt.userModel!),
           bottomNavigationBar: CurvedNavigationBar(
             index: homecbt.navindex,
-            height: 50,
+            height: 50.h,
             backgroundColor: AppColors.primaryswatch,
             items: <Widget>[
               Icon(

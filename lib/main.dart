@@ -20,6 +20,7 @@ import 'package:book_store_eraa/Features/update_profile/presentation/manager/cub
 import 'package:book_store_eraa/Features/update_profile/presentation/views/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   SecureStorage.init();
@@ -66,25 +67,33 @@ class MyApp extends StatelessWidget {
             ..getCities(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: AppColors.primaryswatch,
-          // useMaterial3: true,
-        ),
-        initialRoute: SplashScreen.id,
-        routes: {
-          SplashScreen.id: (context) => const SplashScreen(),
-          FirstOnBoardingScreen.id: (context) => const FirstOnBoardingScreen(),
-          SecondOnBoardingScreen.id: (context) =>
-              const SecondOnBoardingScreen(),
-          RegisterScreen.id: (context) => const RegisterScreen(),
-          LoginScreen.id: (context) => const LoginScreen(),
-          HomePage.id: (context) => const HomePage(),
-          UpdateProfile.id: (context) => const UpdateProfile(),
-          BookDetails.id: (context) => const BookDetails(),
-          CheckOut.id: (context) => const CheckOut(),
-          OrderHistory.id: (context) => const OrderHistory(),
+      child: ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: AppColors.primaryswatch,
+              // useMaterial3: true,
+            ),
+            initialRoute: SplashScreen.id,
+            routes: {
+              SplashScreen.id: (context) => const SplashScreen(),
+              FirstOnBoardingScreen.id: (context) =>
+                  const FirstOnBoardingScreen(),
+              SecondOnBoardingScreen.id: (context) =>
+                  const SecondOnBoardingScreen(),
+              RegisterScreen.id: (context) => const RegisterScreen(),
+              LoginScreen.id: (context) => const LoginScreen(),
+              HomePage.id: (context) => const HomePage(),
+              UpdateProfile.id: (context) => const UpdateProfile(),
+              BookDetails.id: (context) => const BookDetails(),
+              CheckOut.id: (context) => const CheckOut(),
+              OrderHistory.id: (context) => const OrderHistory(),
+            },
+          );
         },
       ),
     );

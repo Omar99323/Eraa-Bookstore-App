@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cu
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/book_componant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BooksBody extends StatefulWidget {
   const BooksBody(
@@ -50,9 +51,9 @@ class _BooksBodyState extends State<BooksBody> {
     }
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 15,
-          horizontal: 20,
+        padding: EdgeInsets.symmetric(
+          vertical: 15.h,
+          horizontal: 20.w,
         ),
         child: Column(
           children: [
@@ -69,15 +70,15 @@ class _BooksBodyState extends State<BooksBody> {
                 label: const Text('Search'),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: AppColors.primaryswatch),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: AppColors.colorWhite),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(color: AppColors.colorWhite),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
               ),
               onSubmitted: (value) {
@@ -88,11 +89,11 @@ class _BooksBodyState extends State<BooksBody> {
                 BlocProvider.of<HomeCubit>(context).searchin();
               },
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             BlocProvider.of<HomeCubit>(context).searching
                 ? const Expanded(
                     child: Center(
-                      child: LinearProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(),
                     ),
                   )
                 : Expanded(
@@ -118,7 +119,7 @@ class _BooksBodyState extends State<BooksBody> {
                                       wishids: wishids,
                                     ),
                       separatorBuilder: (context, index) =>
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                     ),
                   ),
           ],

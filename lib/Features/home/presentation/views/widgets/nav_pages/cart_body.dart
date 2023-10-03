@@ -5,6 +5,7 @@ import 'package:book_store_eraa/Features/home/data/models/cart_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartBody extends StatefulWidget {
   const CartBody({super.key, required this.cartbooks, required this.cartModel});
@@ -16,12 +17,11 @@ class CartBody extends StatefulWidget {
 }
 
 class _CartBodyState extends State<CartBody> {
-  int quantity = 1;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(15.r),
         child: HomeStates is HomeCartBooksLoading
             ? const Center(
                 child: CircularProgressIndicator.adaptive(),
@@ -39,7 +39,7 @@ class _CartBodyState extends State<CartBody> {
                           const SizedBox(height: 20),
                       itemBuilder: (context, index) => widget.cartbooks.isEmpty
                           ? Padding(
-                              padding: const EdgeInsets.only(top: 300),
+                              padding: EdgeInsets.only(top: 300.h),
                               child: Text(
                                 'No books in cart for now!',
                                 textAlign: TextAlign.center,
@@ -51,20 +51,20 @@ class _CartBodyState extends State<CartBody> {
                               : CartItem(book: widget.cartbooks[index]),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20.h),
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    height: 80,
+                    padding: EdgeInsets.all(10.r),
+                    height: 60.h,
                     decoration: BoxDecoration(
                       color: AppColors.primaryswatch,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15.r),
                     ),
                     child: Row(
                       children: [
                         Text(
                           'Total price :  ${widget.cartModel.total ?? 0.0} L.E',
                           style: AppStyles.textStyle24w400.copyWith(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             color: AppColors.colorWhite,
                           ),
                         ),
@@ -74,17 +74,17 @@ class _CartBodyState extends State<CartBody> {
                             Navigator.pushNamed(context, CheckOut.id);
                           },
                           child: Container(
-                            height: 50,
-                            width: 120,
+                            height: 40.h,
+                            width: 100.w,
                             decoration: BoxDecoration(
                               color: AppColors.colorWhite,
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(30.r),
                             ),
                             child: Center(
                               child: Text(
                                 'CheckOut',
                                 style: AppStyles.textStyle24w400.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 14.sp,
                                   color: AppColors.primaryswatch,
                                   fontWeight: FontWeight.bold,
                                 ),

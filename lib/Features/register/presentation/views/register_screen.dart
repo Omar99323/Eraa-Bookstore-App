@@ -32,9 +32,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             'Successfully registered!',
             type: AnimatedSnackBarType.success,
             mobilePositionSettings: const MobilePositionSettings(
-              topOnAppearance: 100,
+              bottomOnAppearance: 100,
             ),
-            mobileSnackBarPosition: MobileSnackBarPosition.top,
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
           ).show(context);
           Navigator.pushReplacementNamed(context, HomePage.id);
         }
@@ -43,9 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             state.errmsg,
             type: AnimatedSnackBarType.error,
             mobilePositionSettings: const MobilePositionSettings(
-              topOnAppearance: 100,
+              bottomOnAppearance: 100,
             ),
-            mobileSnackBarPosition: MobileSnackBarPosition.top,
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
           ).show(context);
         }
       },

@@ -5,6 +5,7 @@ import 'package:book_store_eraa/Features/book_details/presentation/manager/cubit
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:like_button/like_button.dart';
 
 class BookDetails extends StatefulWidget {
@@ -50,7 +51,7 @@ class _BookDetailsState extends State<BookDetails> {
                                 children: [
                                   Container(
                                     width: double.infinity,
-                                    height: 450,
+                                    height: 400.h,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
@@ -60,8 +61,8 @@ class _BookDetailsState extends State<BookDetails> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20, right: 50, top: 30),
+                                    padding: EdgeInsets.only(
+                                        left: 10.w, right: 40.w, top: 30.h),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -132,7 +133,7 @@ class _BookDetailsState extends State<BookDetails> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(20),
+                                padding: EdgeInsets.all(10.r),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -140,10 +141,10 @@ class _BookDetailsState extends State<BookDetails> {
                                       bookcbt.bookModel!.name!,
                                       style: AppStyles.textStyle34w900.copyWith(
                                         color: AppColors.colorBlack,
-                                        fontSize: 30,
+                                        fontSize: 26.sp,
                                       ),
                                     ),
-                                    const SizedBox(height: 20),
+                                    SizedBox(height: 10.h),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -152,7 +153,7 @@ class _BookDetailsState extends State<BookDetails> {
                                           bookcbt.bookModel!.category!,
                                           style: AppStyles.textStyle24w400
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             color: AppColors.colorBlack
                                                 .withOpacity(0.5),
                                           ),
@@ -163,7 +164,7 @@ class _BookDetailsState extends State<BookDetails> {
                                               "${bookcbt.bookModel!.price!} L.E",
                                               style: AppStyles.textStyle24w400
                                                   .copyWith(
-                                                fontSize: 13,
+                                                fontSize: 13.sp,
                                                 color: AppColors.colorBlack
                                                     .withOpacity(0.3),
                                                 decoration:
@@ -174,7 +175,7 @@ class _BookDetailsState extends State<BookDetails> {
                                               "${bookcbt.bookModel!.priceAfterDiscount.toString()} L.E",
                                               style: AppStyles.textStyle24w400
                                                   .copyWith(
-                                                fontSize: 14,
+                                                fontSize: 14.sp,
                                                 color: AppColors.primaryswatch,
                                               ),
                                             ),
@@ -182,19 +183,19 @@ class _BookDetailsState extends State<BookDetails> {
                                         )
                                       ],
                                     ),
-                                    const SizedBox(height: 20),
+                                    SizedBox(height: 10.h),
                                     Text(
                                       "Description:",
                                       style: AppStyles.textStyle34w900.copyWith(
                                         color: AppColors.colorBlack,
-                                        fontSize: 20,
+                                        fontSize: 18.sp,
                                       ),
                                     ),
-                                    const SizedBox(height: 5),
+                                    SizedBox(height: 5.h),
                                     Text(
                                       bookcbt.bookModel!.description!,
                                       style: AppStyles.textStyle24w400.copyWith(
-                                        fontSize: 16,
+                                        fontSize: 14.sp,
                                         color: AppColors.colorBlack
                                             .withOpacity(0.5),
                                       ),
@@ -207,9 +208,9 @@ class _BookDetailsState extends State<BookDetails> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: 15.w),
                         child: SizedBox(
-                          height: 70,
+                          height: 50.h,
                           width: double.infinity,
                           child: TextButton(
                             style: TextButton.styleFrom(
@@ -218,14 +219,14 @@ class _BookDetailsState extends State<BookDetails> {
                                   borderRadius: BorderRadius.circular(26),
                                 )),
                             onPressed: () {
-                              BlocProvider.of<HomeCubit>(context)
-                                  .addToCart(id: bookcbt.bookModel!.id!.toString());
+                              BlocProvider.of<HomeCubit>(context).addToCart(
+                                  id: bookcbt.bookModel!.id!.toString());
                             },
                             child: Text(
                               "Add To Cart",
                               textAlign: TextAlign.center,
                               style: AppStyles.textStyle24w400.copyWith(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: AppColors.colorWhite,
                                 fontWeight: FontWeight.bold,
                               ),

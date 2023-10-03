@@ -2,6 +2,7 @@ import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/home/data/models/category_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/category_componant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({
@@ -15,17 +16,16 @@ class CategoriesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 20),
         Text(
           'Categories',
           style: AppStyles.textStyle24w400.copyWith(
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.h),
         SizedBox(
-          height: 130,
+          height: 100.h,
           child: ListView.separated(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
@@ -34,7 +34,7 @@ class CategoriesSection extends StatelessWidget {
             itemBuilder: (context, index) => CategoryComponant(
               categoryModel: categories[index],
             ),
-            separatorBuilder: (context, index) => const SizedBox(width: 6),
+            separatorBuilder: (context, index) => SizedBox(width: 2.w),
           ),
         ),
       ],

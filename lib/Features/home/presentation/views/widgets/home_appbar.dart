@@ -1,11 +1,14 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
     super.key,
-    required this.scaffoldkey, required this.username, required this.userimage,
+    required this.scaffoldkey,
+    required this.username,
+    required this.userimage,
   });
 
   final GlobalKey<ScaffoldState> scaffoldkey;
@@ -25,8 +28,8 @@ class HomeAppBar extends StatelessWidget {
             size: 30,
           ),
         ),
-        const SizedBox(
-          width: 10,
+        SizedBox(
+          width: 8.w,
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,27 +38,26 @@ class HomeAppBar extends StatelessWidget {
               'Hi, ${username.split(' ')[0]}',
               style: AppStyles.textStyle24w400.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 18.sp,
               ),
             ),
             Text(
               'What are you reading today?',
               style: AppStyles.textStyle24w400.copyWith(
-                fontSize: 14,
+                fontSize: 14.sp,
                 color: AppColors.colorBlack.withOpacity(0.5),
               ),
             ),
           ],
         ),
         const Spacer(),
-         CircleAvatar(
+        CircleAvatar(
           radius: 30,
           backgroundColor: AppColors.primaryswatch,
           backgroundImage: NetworkImage(userimage),
-          // child: Image.network(),
         ),
-        const SizedBox(
-          width: 20,
+        SizedBox(
+          width: 20.w,
         ),
       ],
     );

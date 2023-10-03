@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Core/widgets/custom_form_field.dart';
 import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/update_profile/presentation/views/update_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({super.key, required this.userModel});
@@ -22,12 +23,12 @@ class ProfileBody extends StatelessWidget {
                 Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    const SizedBox(
-                      height: 330,
+                    SizedBox(
+                      height: 230.h,
                       width: double.infinity,
                     ),
                     Container(
-                      height: 180,
+                      height: 140.h,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         color: AppColors.primaryswatch,
@@ -37,7 +38,8 @@ class ProfileBody extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SafeArea(
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.h),
                       child: Text(
                         'Profile',
                         style: AppStyles.textStyle34w900.copyWith(
@@ -50,10 +52,10 @@ class ProfileBody extends StatelessWidget {
                   ],
                 ),
                 CircleAvatar(
-                  radius: 110,
+                  radius: 85.r,
                   backgroundColor: AppColors.colorWhite,
                   child: CircleAvatar(
-                    radius: 100,
+                    radius: 80.r,
                     backgroundColor: AppColors.primaryswatch,
                     backgroundImage: NetworkImage(userModel.image!),
                   ),
@@ -61,11 +63,12 @@ class ProfileBody extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              padding: EdgeInsets.all(10.r),
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 15.h),
                     decoration: BoxDecoration(
                       color: AppColors.colorBlack.withOpacity(0.05),
                       borderRadius: BorderRadius.circular(10),
@@ -81,7 +84,7 @@ class ProfileBody extends StatelessWidget {
                           ),
                           disenabled: true,
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 15.h),
                         CustomFormField(
                           initvalue: userModel.email,
                           label: 'Email',
@@ -91,7 +94,7 @@ class ProfileBody extends StatelessWidget {
                           ),
                           disenabled: true,
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 15.h),
                         CustomFormField(
                           initvalue: userModel.phone ?? 'null',
                           label: 'Phone',
@@ -101,7 +104,7 @@ class ProfileBody extends StatelessWidget {
                           ),
                           disenabled: true,
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 15.h),
                         CustomFormField(
                           initvalue: userModel.city ?? 'null',
                           label: 'City',
@@ -111,7 +114,7 @@ class ProfileBody extends StatelessWidget {
                           ),
                           disenabled: true,
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 15.h),
                         CustomFormField(
                           initvalue: userModel.address ?? 'null',
                           label: 'Address',
@@ -124,9 +127,9 @@ class ProfileBody extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 20.h),
                   SizedBox(
-                    height: 60,
+                    height: 50.h,
                     width: double.infinity,
                     child: TextButton(
                       style: TextButton.styleFrom(
@@ -141,7 +144,7 @@ class ProfileBody extends StatelessWidget {
                         "Edit Profle",
                         textAlign: TextAlign.center,
                         style: AppStyles.textStyle24w400.copyWith(
-                          fontSize: 18,
+                          fontSize: 16.sp,
                           color: AppColors.colorWhite,
                           fontWeight: FontWeight.bold,
                         ),

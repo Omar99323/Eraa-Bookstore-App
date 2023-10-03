@@ -4,6 +4,7 @@ import 'package:book_store_eraa/Features/home/data/models/cart_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CartItem extends StatefulWidget {
   const CartItem({super.key, required this.book});
@@ -27,28 +28,27 @@ class _CartItemState extends State<CartItem> {
       alignment: Alignment.topRight,
       children: [
         Container(
-          height: 200,
-          padding: const EdgeInsets.all(15),
+          height: 160.h,
+          padding: EdgeInsets.all(10.r),
           decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.grey),
+            border: Border.all(width: 1.w, color: Colors.grey),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
             children: [
               Container(
-                height: 200,
-                width: 110,
+                width: 90.w,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.colorBlack,
+                  borderRadius: BorderRadius.circular(10.r),
+                  color: AppColors.primaryswatch,
                   image: DecorationImage(
                     image: NetworkImage(widget.book.itemProductImage!),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 20,
+              SizedBox(
+                width: 15.w,
               ),
               Expanded(
                 child: Column(
@@ -58,20 +58,20 @@ class _CartItemState extends State<CartItem> {
                     Text(
                       widget.book.itemProductName!,
                       style: AppStyles.textStyle24w400.copyWith(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: 20.h,
                     ),
                     Row(
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(width: 1, color: Colors.grey),
+                            border: Border.all(width: 1.w, color: Colors.grey),
                           ),
                           child: Row(
                             children: [
@@ -85,7 +85,6 @@ class _CartItemState extends State<CartItem> {
                                               id: widget.book.itemId!
                                                   .toString(),
                                               quantity: quantity.toString());
-                                      // print(widget.quantity);
                                     }
                                   });
                                 },
@@ -100,13 +99,12 @@ class _CartItemState extends State<CartItem> {
                                   setState(() {
                                     if (quantity! > 1) {
                                       quantity = quantity! - 1;
-                                      
+
                                       BlocProvider.of<HomeCubit>(context)
                                           .updateCart(
                                               id: widget.book.itemId!
                                                   .toString(),
                                               quantity: quantity.toString());
-                                      // print(widget.quantity);
                                     }
                                   });
                                 },
@@ -125,7 +123,7 @@ class _CartItemState extends State<CartItem> {
                               "${widget.book.itemProductPrice} L.E",
                               textAlign: TextAlign.center,
                               style: AppStyles.textStyle24w400.copyWith(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                                 color: AppColors.colorBlack.withOpacity(0.3),
                                 decoration: TextDecoration.lineThrough,
                               ),
@@ -134,7 +132,7 @@ class _CartItemState extends State<CartItem> {
                               "${widget.book.itemProductPriceAfterDiscount} L.E",
                               textAlign: TextAlign.center,
                               style: AppStyles.textStyle24w400.copyWith(
-                                fontSize: 14,
+                                fontSize: 14.sp,
                                 color: AppColors.primaryswatch,
                               ),
                             ),
@@ -149,7 +147,7 @@ class _CartItemState extends State<CartItem> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10.r),
           child: GestureDetector(
             onTap: () {
               BlocProvider.of<HomeCubit>(context)

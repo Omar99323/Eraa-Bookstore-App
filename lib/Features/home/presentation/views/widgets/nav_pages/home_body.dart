@@ -8,6 +8,7 @@ import 'package:book_store_eraa/Features/home/presentation/views/widgets/home_ap
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/new_arrivals.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/slider_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({
@@ -32,7 +33,7 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(10.r),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,7 +42,7 @@ class HomeBody extends StatelessWidget {
               username: userModel.name!,
               userimage: userModel.image!,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 15.h),
             Expanded(
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
@@ -50,18 +51,19 @@ class HomeBody extends StatelessWidget {
                     SliderSection(
                       slinderImages: slinderImages,
                     ),
+                    SizedBox(height: 15.h),
                     BestSellerSection(
                       bestSellerBooks: bestSellerBooks,
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: 10.h),
                     BannarsSection(
                       bannarImages: slinderImages,
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 15.h),
                     CategoriesSection(
                       categories: categories,
                     ),
-                    const SizedBox(height: 15),
+                    SizedBox(height: 15.h),
                     NewArrivalSection(
                       newArrivalBooks: newArrivalBooks,
                     ),

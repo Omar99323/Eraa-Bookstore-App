@@ -5,6 +5,7 @@ import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:like_button/like_button.dart';
 
 class WishBookComponant extends StatelessWidget {
@@ -21,11 +22,11 @@ class WishBookComponant extends StatelessWidget {
       onTap: () => Navigator.pushNamed(context, BookDetails.id,
           arguments: bookModel.id.toString()),
       child: Container(
-        height: 200,
-        padding: const EdgeInsets.all(15),
+        height: 160.h,
+        padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: Colors.grey),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r),
         ),
         child: Row(
           children: [
@@ -33,10 +34,9 @@ class WishBookComponant extends StatelessWidget {
               children: [
                 if (bookModel.image != null)
                   Container(
-                    height: 200,
-                    width: 110,
+                    width: 100.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       color: AppColors.colorBlack,
                       image: DecorationImage(
                         image: NetworkImage(bookModel.image!),
@@ -45,12 +45,12 @@ class WishBookComponant extends StatelessWidget {
                     ),
                   ),
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.r),
                   child: Container(
-                    width: 50,
-                    height: 35,
+                    width: 40.w,
+                    height: 25.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(7.r),
                       color: AppColors.primaryswatch,
                     ),
                     child: Center(
@@ -58,7 +58,7 @@ class WishBookComponant extends StatelessWidget {
                         "${bookModel.discount!.toString()}%",
                         style: AppStyles.textStyle24w400.copyWith(
                           color: AppColors.colorWhite,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
@@ -66,56 +66,56 @@ class WishBookComponant extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              width: 20,
+            SizedBox(
+              width: 10.w,
             ),
             SizedBox(
-              width: 170,
+              width: 155.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     bookModel.name!,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     bookModel.category!,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 16,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.colorBlack.withOpacity(0.3),
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     "${bookModel.price!} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 13,
+                      fontSize: 13.sp,
                       color: AppColors.colorBlack.withOpacity(0.3),
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    height: 10.h,
                   ),
                   Text(
                     "${discountprice.toStringAsFixed(1).toString()} L.E",
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyle24w400.copyWith(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.primaryswatch,
                     ),
                   ),

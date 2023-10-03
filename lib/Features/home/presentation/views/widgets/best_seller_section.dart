@@ -2,6 +2,7 @@ import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/best_seller_book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BestSellerSection extends StatelessWidget {
   const BestSellerSection({
@@ -15,21 +16,16 @@ class BestSellerSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 20,
-        ),
         Text(
           'Best Seller',
           style: AppStyles.textStyle24w400.copyWith(
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 10.h),
         SizedBox(
-          height: 350,
+          height: 260.h,
           child: ListView.separated(
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
@@ -38,7 +34,7 @@ class BestSellerSection extends StatelessWidget {
             itemBuilder: (context, index) => BestSellerBook(
               bookModel: bestSellerBooks[index],
             ),
-            separatorBuilder: (context, index) => const SizedBox(width: 10),
+            separatorBuilder: (context, index) => SizedBox(width: 10.w),
           ),
         ),
       ],

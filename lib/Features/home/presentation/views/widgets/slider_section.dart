@@ -1,6 +1,7 @@
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SliderSection extends StatelessWidget {
   const SliderSection({
@@ -14,7 +15,6 @@ class SliderSection extends StatelessWidget {
     return CarouselSlider.builder(
       itemCount: slinderImages.length,
       itemBuilder: (context, index, realIndex) => Container(
-        width: 370,
         decoration: BoxDecoration(
           color: AppColors.primaryswatch,
           borderRadius: BorderRadius.circular(10),
@@ -25,7 +25,7 @@ class SliderSection extends StatelessWidget {
         ),
       ),
       options: CarouselOptions(
-        height: 180,
+        height: 140.h,
         enableInfiniteScroll: true,
         autoPlay: true,
         enlargeCenterPage: true,

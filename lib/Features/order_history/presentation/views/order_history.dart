@@ -5,11 +5,23 @@ import 'package:book_store_eraa/Features/order_history/presentation/manager/cubi
 import 'package:book_store_eraa/Features/order_history/presentation/manager/cubit/order_history_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OrderHistory extends StatelessWidget {
+class OrderHistory extends StatefulWidget {
   static const id = 'OrderHistory';
 
   const OrderHistory({super.key});
+
+  @override
+  State<OrderHistory> createState() => _OrderHistoryState();
+}
+
+class _OrderHistoryState extends State<OrderHistory> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<OrderHistoryCubit>(context).orderHistory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +32,9 @@ class OrderHistory extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15,
-                horizontal: 30,
+              padding: EdgeInsets.symmetric(
+                vertical: 15.h,
+                horizontal: 20.w,
               ),
               child: Column(
                 children: [
@@ -37,16 +49,16 @@ class OrderHistory extends StatelessWidget {
                           size: 30,
                         ),
                       ),
-                      const SizedBox(width: 30),
+                      SizedBox(width: 30.w),
                       Text(
                         'Orders History',
                         style: AppStyles.textStyle34w900.copyWith(
-                          fontSize: 26,
+                          fontSize: 26.sp,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  SizedBox(height: 20.h),
                   Expanded(
                     child: ListView.separated(
                       shrinkWrap: true,
@@ -56,10 +68,12 @@ class OrderHistory extends StatelessWidget {
                       itemBuilder: (context, index) => ordercbt.orders.isEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(top: 100),
-                              child: Text(
-                                'No orders for now!',
-                                style: AppStyles.textStyle34w900.copyWith(
-                                  fontSize: 16,
+                              child: Center(
+                                child: Text(
+                                  'No orders for now!',
+                                  style: AppStyles.textStyle34w900.copyWith(
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             )
@@ -70,7 +84,7 @@ class OrderHistory extends StatelessWidget {
                               : OrderComponant(
                                   orderModel: ordercbt.orders[index]),
                       separatorBuilder: (context, index) =>
-                          const SizedBox(height: 20),
+                          SizedBox(height: 10.h),
                     ),
                   ),
                 ],
@@ -91,8 +105,8 @@ class OrderComponant extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
-      padding: const EdgeInsets.all(30),
+      height: 130.h,
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.grey),
         borderRadius: BorderRadius.circular(15),
@@ -105,12 +119,10 @@ class OrderComponant extends StatelessWidget {
               Text(orderModel.status!,
                   style: AppStyles.textStyle24w400
                       .copyWith(color: AppColors.primaryswatch)),
-              Text(orderModel.orderDate!,
-                  style: AppStyles.textStyle24w400
-                      .copyWith(color: AppColors.primaryswatch)),
+              Text(orderModel.orderDate!, style: AppStyles.textStyle24w400),
             ],
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: 30.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

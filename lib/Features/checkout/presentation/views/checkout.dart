@@ -8,6 +8,7 @@ import 'package:book_store_eraa/Features/checkout/presentation/manager/cubit/che
 import 'package:book_store_eraa/Features/checkout/presentation/manager/cubit/check_out_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CheckOut extends StatefulWidget {
   const CheckOut({super.key});
@@ -38,20 +39,19 @@ class _CheckOutState extends State<CheckOut> {
       listener: (context, state) {
         if (state is MakeAnOrder) {
           Navigator.pop(context);
-          AnimatedSnackBar.material("Order made",
+          AnimatedSnackBar.material("Order made Successfully",
                   type: AnimatedSnackBarType.success)
               .show(context);
         }
       },
       builder: (context, state) {
         var checkcbt = BlocProvider.of<CheckOutCubit>(context);
-
         return Scaffold(
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 30,
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.w,
+                vertical: 20.h,
               ),
               child: checkcbt.checkoutModel == null || checkcbt.cityies.isEmpty
                   ? const Center(
@@ -60,7 +60,7 @@ class _CheckOutState extends State<CheckOut> {
                   : Form(
                       key: key,
                       child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         child: Column(
                           children: [
                             CustomFormField(
@@ -74,7 +74,7 @@ class _CheckOutState extends State<CheckOut> {
                                 name = p0;
                               },
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 15.h),
                             CustomFormField(
                               onchange: (p0) {
                                 email = p0;
@@ -88,7 +88,7 @@ class _CheckOutState extends State<CheckOut> {
                                 color: AppColors.primaryswatch,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 15.h),
                             CustomFormField(
                               onchange: (p0) {
                                 phone = p0;
@@ -108,7 +108,7 @@ class _CheckOutState extends State<CheckOut> {
                                 }
                               },
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 15.h),
                             CustomFormField(
                               onchange: (p0) {
                                 address = p0;
@@ -127,13 +127,12 @@ class _CheckOutState extends State<CheckOut> {
                                 color: AppColors.primaryswatch,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 15.h),
                             SizedBox(
-                              height: 80,
+                              height: 50.h,
                               child: DropdownButtonFormField(
                                 decoration: InputDecoration(
                                   hintStyle: AppStyles.textStyle34w900.copyWith(
-                                    fontSize: 20,
                                     color: AppColors.colorBlack,
                                   ),
                                   focusedBorder: const OutlineInputBorder(
@@ -153,7 +152,7 @@ class _CheckOutState extends State<CheckOut> {
                                 hint: Text(
                                   'Select City',
                                   style: AppStyles.textStyle24w400.copyWith(
-                                    fontSize: 18,
+                                    fontSize: 16.sp,
                                   ),
                                 ),
                                 items: dropsList(list: checkcbt.cityies),
@@ -167,11 +166,11 @@ class _CheckOutState extends State<CheckOut> {
                                 },
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10.h),
                             const Divider(thickness: 2),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 10.h),
                             SizedBox(
-                              height: 250,
+                              height: 220.h,
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 physics: const BouncingScrollPhysics(),
@@ -181,7 +180,17 @@ class _CheckOutState extends State<CheckOut> {
                                     : checkcbt.checkoutModel!.cartItems!.length,
                                 itemBuilder: (context, index) => checkcbt
                                         .checkoutModel!.cartItems!.isEmpty
-                                    ? const Text('There is nothing to checkout')
+                                    ? Padding(
+                                        padding: EdgeInsets.only(top: 50.h),
+                                        child: Center(
+                                            child: Text(
+                                          'There is nothing to checkout',
+                                          style: AppStyles.textStyle34w900
+                                              .copyWith(
+                                            fontSize: 20.sp,
+                                          ),
+                                        )),
+                                      )
                                     : checkcbt.checkoutModel!.cartItems!
                                                 .length ==
                                             1
@@ -199,12 +208,12 @@ class _CheckOutState extends State<CheckOut> {
                                                 style:
                                                     AppStyles.textStyle24w400,
                                               ),
-                                              const SizedBox(height: 10),
+                                              SizedBox(height: 10.h),
                                               Text(
                                                 'Quantity : ${checkcbt.checkoutModel!.cartItems![0].itemQuantity}',
                                                 style: AppStyles.textStyle24w400
                                                     .copyWith(
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                   color: AppColors.colorBlack
                                                       .withOpacity(0.4),
                                                 ),
@@ -229,12 +238,12 @@ class _CheckOutState extends State<CheckOut> {
                                                       AppStyles.textStyle24w400,
                                                 ),
                                               ),
-                                              const SizedBox(height: 10),
+                                              SizedBox(height: 10.h),
                                               Text(
                                                 'Quantity : ${checkcbt.checkoutModel!.cartItems![index].itemQuantity}',
                                                 style: AppStyles.textStyle24w400
                                                     .copyWith(
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                   color: AppColors.colorBlack
                                                       .withOpacity(0.4),
                                                 ),
@@ -242,13 +251,13 @@ class _CheckOutState extends State<CheckOut> {
                                             ],
                                           ),
                                 separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 20),
+                                    SizedBox(height: 15.h),
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 10.h),
                             Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 80,
+                              padding: EdgeInsets.all(10.r),
+                              height: 60.h,
                               decoration: BoxDecoration(
                                 color: AppColors.primaryswatch,
                                 borderRadius: BorderRadius.circular(20),
@@ -258,7 +267,7 @@ class _CheckOutState extends State<CheckOut> {
                                   Text(
                                     'Total price :  ${checkcbt.checkoutModel!.total} L.E',
                                     style: AppStyles.textStyle24w400.copyWith(
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                       color: AppColors.colorWhite,
                                     ),
                                   ),
@@ -285,8 +294,8 @@ class _CheckOutState extends State<CheckOut> {
                                       }
                                     },
                                     child: Container(
-                                      height: 50,
-                                      width: 120,
+                                      height: 40.h,
+                                      width: 110.w,
                                       decoration: BoxDecoration(
                                         color: AppColors.colorWhite,
                                         borderRadius: BorderRadius.circular(30),
@@ -296,7 +305,7 @@ class _CheckOutState extends State<CheckOut> {
                                           'Order Now!',
                                           style: AppStyles.textStyle24w400
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             color: AppColors.primaryswatch,
                                             fontWeight: FontWeight.bold,
                                           ),
