@@ -3,6 +3,7 @@ import 'package:book_store_eraa/Core/helpers/secure_storage.dart';
 import 'package:book_store_eraa/Features/OnBoarding/presentation/views/first_on_boarding_screen.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/login/presentation/views/login_screen.dart';
+import 'package:book_store_eraa/Features/otp/presentation/views/otp.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -24,14 +25,19 @@ class _SplashScreenState extends State<SplashScreen> {
         ), () async {
       String? token = await SecureStorage.getData(key: 'token');
       String? firsttime = await SecureStorage.getData(key: 'firsttime');
+      String? otp = await SecureStorage.getData(key: 'otp');
 
-      if (firsttime==null) {
+      if (firsttime == null) {
         Navigator.of(context).pushReplacementNamed(FirstOnBoardingScreen.id);
       } else {
-        if (token==null) {
+        if (token == null) {
           Navigator.of(context).pushReplacementNamed(LoginScreen.id);
         } else {
-          Navigator.of(context).pushReplacementNamed(HomePage.id);
+          if (otp == null) {
+            Navigator.of(context).pushReplacementNamed(OTPScreen.id);
+          } else {
+            Navigator.of(context).pushReplacementNamed(HomePage.id);
+          }
         }
       }
     });

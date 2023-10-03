@@ -49,7 +49,11 @@ class LoginCubit extends Cubit<LoginStates> {
       } else {
         userModel = LoginUserModel.fromJson(value['data']);
         SecureStorage.writeData(key: 'token', value: userModel!.token);
-        emit(LoginSuccess());
+        if (userModel!.user!.emailVerified == true) {
+          emit(LoginSuccess(page: 'home'));
+        } else {
+          emit(LoginSuccess(page: 'otp'));
+        }
       }
     });
   }

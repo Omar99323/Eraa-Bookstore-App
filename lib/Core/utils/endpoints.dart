@@ -23,4 +23,6 @@ class EndPoints {
   static String checkoutEndpoint = '/checkout';
   static String makeOrderEndpoint = '/place-order';
   static String orderHistoryEndpoint = '/order-history';
+  static String verifyEmailEndpoint = '/verify-email';
+  static String resendVerifyEmailEndpoint = '/resend-verify-code';
 }

@@ -4,7 +4,11 @@ final class LoginInitial extends LoginStates {}
 
 final class ChangeVisability extends LoginStates {}
 
-final class LoginSuccess extends LoginStates {}
+final class LoginSuccess extends LoginStates {
+  final String page;
+
+  LoginSuccess({required this.page});
+}
 
 final class LoginLoading extends LoginStates {}
 

@@ -2,7 +2,7 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
-import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
+import 'package:book_store_eraa/Features/otp/presentation/views/otp.dart';
 import 'package:book_store_eraa/Features/register/presentation/manager/cubit/register_cubit.dart';
 import 'package:book_store_eraa/Features/register/presentation/manager/cubit/register_cubit_state.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +29,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       listener: (context, state) {
         if (state is RegisterSuccess) {
           AnimatedSnackBar.material(
-            'Successfully registered!',
+            'Successfully registered!, Please verify your email',
             type: AnimatedSnackBarType.success,
             mobilePositionSettings: const MobilePositionSettings(
               bottomOnAppearance: 100,
             ),
             mobileSnackBarPosition: MobileSnackBarPosition.bottom,
           ).show(context);
-          Navigator.pushReplacementNamed(context, HomePage.id);
+          Navigator.pushReplacementNamed(context, OTPScreen.id);
         }
         if (state is RegisterFailure) {
           AnimatedSnackBar.material(
