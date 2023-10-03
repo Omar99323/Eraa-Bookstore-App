@@ -26,19 +26,29 @@ class MyDrawer extends StatelessWidget {
               radius: 50.r,
               backgroundImage: NetworkImage(userModel.image!),
             ),
-            accountName: Text(
-              userModel.name!,
-              style: AppStyles.textStyle24w400.copyWith(
-                color: AppColors.colorWhite,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.sp,
+            accountName: SizedBox(
+              width: 200.w,
+              child: Text(
+                userModel.name!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppStyles.textStyle24w400.copyWith(
+                  color: AppColors.colorWhite,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.sp,
+                ),
               ),
             ),
-            accountEmail: Text(
-              userModel.email!,
-              style: AppStyles.textStyle24w400.copyWith(
-                color: AppColors.colorWhite,
-                fontSize: 14.sp,
+            accountEmail: SizedBox(
+              width: 200.w,
+              child: Text(
+                userModel.email!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppStyles.textStyle24w400.copyWith(
+                  color: AppColors.colorWhite,
+                  fontSize: 14.sp,
+                ),
               ),
             ),
           ),

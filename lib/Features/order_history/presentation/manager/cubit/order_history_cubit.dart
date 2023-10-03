@@ -17,8 +17,14 @@ class OrderHistoryCubit extends Cubit<OrderHistoryState> {
       url: EndPoints.baseUrl + EndPoints.orderHistoryEndpoint,
       token: token,
     ).then((value) {
-      for (var element in value['data']['orders']) {
-        orders.add(OrderModel.fromJson(element));
+      if (value['data'] is List) {
+        for (var element in value['data']) {
+          orders.add(OrderModel.fromJson(element));
+        }
+      } else {
+        for (var element in value['data']['orders']) {
+          orders.add(OrderModel.fromJson(element));
+        }
       }
     });
     emit(OrderHistory());

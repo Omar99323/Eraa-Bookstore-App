@@ -5,7 +5,7 @@ import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_state.dart';
-import 'package:book_store_eraa/Features/otp/presentation/views/otp.dart';
+// import 'package:book_store_eraa/Features/otp/presentation/views/otp.dart';
 import 'package:book_store_eraa/Features/register/presentation/views/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             mobileSnackBarPosition: MobileSnackBarPosition.bottom,
           ).show(context);
-          if (state.page == 'home') {
-            Navigator.pushReplacementNamed(context, HomePage.id);
-          } else {
-            Navigator.pushReplacementNamed(context, OTPScreen.id);
-          }
+          // if (state.page == 'home') {
+          Navigator.pushReplacementNamed(context, HomePage.id);
+          // } else {
+          //   Navigator.pushReplacementNamed(context, OTPScreen.id);
+          // }
         }
         if (state is LoginFailure) {
           AnimatedSnackBar.material(

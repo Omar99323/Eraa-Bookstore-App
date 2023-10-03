@@ -19,6 +19,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeCubit>(context).cartbooks();
+    BlocProvider.of<HomeCubit>(context).wishListBooks();
+    BlocProvider.of<HomeCubit>(context).getUserModel();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {

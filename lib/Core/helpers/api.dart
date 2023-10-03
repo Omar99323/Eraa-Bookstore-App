@@ -15,7 +15,8 @@ class Api {
     http.Response response = await http.get(Uri.parse(url), headers: headers);
     if (response.statusCode == 500) {
       return response.statusCode;
-    } else if (response.statusCode >= 200 && response.statusCode < 300) {
+    } 
+    else if (response.statusCode >= 200 && response.statusCode < 300) {
       return jsonDecode(response.body);
     } else {
       throw Exception(

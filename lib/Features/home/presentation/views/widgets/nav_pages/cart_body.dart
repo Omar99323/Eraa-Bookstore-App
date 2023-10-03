@@ -71,7 +71,9 @@ class _CartBodyState extends State<CartBody> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, CheckOut.id);
+                            if (widget.cartModel.total != null) {
+                              Navigator.pushNamed(context, CheckOut.id);
+                            }
                           },
                           child: Container(
                             height: 40.h,

@@ -6,6 +6,7 @@ import 'package:book_store_eraa/Core/widgets/custom_form_field.dart';
 import 'package:book_store_eraa/Features/checkout/data/models/city_model.dart';
 import 'package:book_store_eraa/Features/checkout/presentation/manager/cubit/check_out_cubit.dart';
 import 'package:book_store_eraa/Features/checkout/presentation/manager/cubit/check_out_state.dart';
+import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,6 +39,7 @@ class _CheckOutState extends State<CheckOut> {
     return BlocConsumer<CheckOutCubit, CheckOutState>(
       listener: (context, state) {
         if (state is MakeAnOrder) {
+          BlocProvider.of<HomeCubit>(context).cartbooks();
           Navigator.pop(context);
           AnimatedSnackBar.material("Order made Successfully",
                   type: AnimatedSnackBarType.success)
@@ -101,9 +103,9 @@ class _CheckOutState extends State<CheckOut> {
                                 color: AppColors.primaryswatch,
                               ),
                               validator: (p0) {
-                                if (p0 == "null" &&
-                                    checkcbt.checkoutModel!.user!.phone ==
-                                        "null") {
+                                if (checkcbt.checkoutModel!.user!.phone ==
+                                        null &&
+                                    p0 == null) {
                                   return 'Phone must not be empty';
                                 }
                               },
@@ -114,9 +116,9 @@ class _CheckOutState extends State<CheckOut> {
                                 address = p0;
                               },
                               validator: (p0) {
-                                if (p0 == "null" &&
-                                    checkcbt.checkoutModel!.user!.address ==
-                                        "null") {
+                                if (checkcbt.checkoutModel!.user!.address ==
+                                        null &&
+                                    p0 == null) {
                                   return 'Address must not be empty';
                                 }
                               },
@@ -170,7 +172,7 @@ class _CheckOutState extends State<CheckOut> {
                             const Divider(thickness: 2),
                             SizedBox(height: 10.h),
                             SizedBox(
-                              height: 220.h,
+                              height: 200.h,
                               child: ListView.separated(
                                 shrinkWrap: true,
                                 physics: const BouncingScrollPhysics(),

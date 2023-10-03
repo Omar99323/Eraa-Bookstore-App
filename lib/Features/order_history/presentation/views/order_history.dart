@@ -122,7 +122,7 @@ class OrderComponant extends StatelessWidget {
               Text(orderModel.orderDate!, style: AppStyles.textStyle24w400),
             ],
           ),
-          SizedBox(height: 30.h),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
