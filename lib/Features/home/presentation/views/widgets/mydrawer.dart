@@ -2,6 +2,7 @@ import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/home/data/models/user_model.dart';
 import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cubit.dart';
+import 'package:book_store_eraa/Features/order_history/presentation/views/order_history.dart';
 import 'package:book_store_eraa/Features/update_profile/presentation/views/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,7 +46,9 @@ class MyDrawer extends StatelessWidget {
             child: Column(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, OrderHistory.id);
+                  },
                   child: Row(
                     children: [
                       Icon(

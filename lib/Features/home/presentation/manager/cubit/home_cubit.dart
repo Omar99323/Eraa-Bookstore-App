@@ -186,6 +186,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   cartbooks() async {
     cartBooks.clear();
+    emit(HomeCartBooksLoading());
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.cartEndpoint,
@@ -201,6 +202,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
   wishListBooks() async {
     wishlistBooks.clear();
+    emit(HomeWishListBooksLoading());
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.wishlistEndpoint,

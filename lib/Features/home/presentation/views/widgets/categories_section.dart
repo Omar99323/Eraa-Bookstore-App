@@ -27,6 +27,7 @@ class CategoriesSection extends StatelessWidget {
         SizedBox(
           height: 130,
           child: ListView.separated(
+            shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: categories.length,

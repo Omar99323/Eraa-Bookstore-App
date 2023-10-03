@@ -97,6 +97,7 @@ class _BooksBodyState extends State<BooksBody> {
                   )
                 : Expanded(
                     child: ListView.separated(
+                      shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
                       itemCount: widget.searchBooks.isEmpty
                           ? widget.allBooks.length

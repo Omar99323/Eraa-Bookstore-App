@@ -22,4 +22,5 @@ class EndPoints {
   static String searchEndpoint = '/products-search?name=';
   static String checkoutEndpoint = '/checkout';
   static String makeOrderEndpoint = '/place-order';
+  static String orderHistoryEndpoint = '/order-history';
 }

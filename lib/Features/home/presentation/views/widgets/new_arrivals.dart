@@ -26,6 +26,7 @@ class NewArrivalSection extends StatelessWidget {
         SizedBox(
           height: 330,
           child: ListView.separated(
+            shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: newArrivalBooks.length,

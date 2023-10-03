@@ -12,6 +12,8 @@ import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_cu
 import 'package:book_store_eraa/Features/home/presentation/views/home_page.dart';
 import 'package:book_store_eraa/Features/login/presentation/manager/cubit/login_cubit.dart';
 import 'package:book_store_eraa/Features/login/presentation/views/login_screen.dart';
+import 'package:book_store_eraa/Features/order_history/presentation/manager/cubit/order_history_cubit.dart';
+import 'package:book_store_eraa/Features/order_history/presentation/views/order_history.dart';
 import 'package:book_store_eraa/Features/register/presentation/manager/cubit/register_cubit.dart';
 import 'package:book_store_eraa/Features/register/presentation/views/register_screen.dart';
 import 'package:book_store_eraa/Features/update_profile/presentation/manager/cubit/update_profile_cubit.dart';
@@ -56,6 +58,9 @@ class MyApp extends StatelessWidget {
           create: (context) => BookDetailsCubit(),
         ),
         BlocProvider(
+          create: (context) => OrderHistoryCubit()..orderHistory(),
+        ),
+        BlocProvider(
           create: (context) => CheckOutCubit()
             ..checkout()
             ..getCities(),
@@ -79,6 +84,7 @@ class MyApp extends StatelessWidget {
           UpdateProfile.id: (context) => const UpdateProfile(),
           BookDetails.id: (context) => const BookDetails(),
           CheckOut.id: (context) => const CheckOut(),
+          OrderHistory.id: (context) => const OrderHistory(),
         },
       ),
     );

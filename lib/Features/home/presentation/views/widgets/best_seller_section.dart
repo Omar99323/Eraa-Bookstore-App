@@ -31,6 +31,7 @@ class BestSellerSection extends StatelessWidget {
         SizedBox(
           height: 350,
           child: ListView.separated(
+            shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: bestSellerBooks.length,
