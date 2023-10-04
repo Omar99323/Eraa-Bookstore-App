@@ -32,15 +32,25 @@ class _HomePageState extends State<HomePage> {
       listener: (context, state) {
         if (state is HomeLogout) {
           Navigator.pushReplacementNamed(context, LoginScreen.id);
-          AnimatedSnackBar.material('Loggedout Successfullly',
-                  type: AnimatedSnackBarType.success)
-              .show(context);
+          AnimatedSnackBar.material(
+            'Loggedout Successfullly',
+            type: AnimatedSnackBarType.success,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
         }
         if (state is HomeAddToCart) {
           BlocProvider.of<HomeCubit>(context).cartbooks();
-          AnimatedSnackBar.material('Book has added to cart',
-                  type: AnimatedSnackBarType.success)
-              .show(context);
+          AnimatedSnackBar.material(
+            'Book has added to cart',
+            type: AnimatedSnackBarType.success,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
         }
       },
       builder: (context, state) {

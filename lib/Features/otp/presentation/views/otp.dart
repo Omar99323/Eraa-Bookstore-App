@@ -28,17 +28,35 @@ class _OTPScreenState extends State<OTPScreen> {
     return BlocConsumer<OtpCubit, OtpState>(
       listener: (context, state) {
         if (state is OtpFailure) {
-          AnimatedSnackBar.material(state.errmsg,
-              type: AnimatedSnackBarType.error);
+          AnimatedSnackBar.material(
+            state.errmsg,
+            type: AnimatedSnackBarType.error,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
         }
         if (state is OtpSuccess) {
-          AnimatedSnackBar.material("Email verified successfully",
-              type: AnimatedSnackBarType.success);
+          AnimatedSnackBar.material(
+            "Email verified successfully",
+            type: AnimatedSnackBarType.success,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
           Navigator.pushReplacementNamed(context, HomePage.id);
         }
         if (state is OtpResend) {
-          AnimatedSnackBar.material("Check your email now!",
-              type: AnimatedSnackBarType.success);
+          AnimatedSnackBar.material(
+            "Check your email now!",
+            type: AnimatedSnackBarType.success,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
         }
       },
       builder: (context, state) {

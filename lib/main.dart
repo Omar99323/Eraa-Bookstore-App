@@ -43,10 +43,7 @@ class MyApp extends StatelessWidget {
             ..getBestSeller()
             ..getNewArrival()
             ..getCategories()
-            ..getUserModel()
-            ..getAllBooks()
-            ..wishListBooks()
-            ..cartbooks(),
+            ..getAllBooks(),
         ),
         BlocProvider(
           create: (context) => LoginCubit(),

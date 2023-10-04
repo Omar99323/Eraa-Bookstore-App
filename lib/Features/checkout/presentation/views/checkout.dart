@@ -41,9 +41,14 @@ class _CheckOutState extends State<CheckOut> {
         if (state is MakeAnOrder) {
           BlocProvider.of<HomeCubit>(context).cartbooks();
           Navigator.pop(context);
-          AnimatedSnackBar.material("Order made Successfully",
-                  type: AnimatedSnackBarType.success)
-              .show(context);
+          AnimatedSnackBar.material(
+            "Order made Successfully",
+            type: AnimatedSnackBarType.success,
+            mobilePositionSettings: const MobilePositionSettings(
+              bottomOnAppearance: 100,
+            ),
+            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
+          ).show(context);
         }
       },
       builder: (context, state) {
@@ -104,8 +109,6 @@ class _CheckOutState extends State<CheckOut> {
                                 color: AppColors.primaryswatch,
                               ),
                               validator: (p0) {
-                                print(checkcbt.checkoutModel!.user!.phone);
-                                print(p0);
                                 if (checkcbt.checkoutModel!.user!.phone ==
                                         null &&
                                     (p0 == null || p0.isEmpty)) {
