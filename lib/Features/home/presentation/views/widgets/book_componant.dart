@@ -36,8 +36,10 @@ class _BookComponantState extends State<BookComponant> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, BookDetails.id,
-          arguments: widget.bookModel.id.toString()),
+      onTap: () => Navigator.pushNamed(context, BookDetails.id, arguments: {
+        'bookid': widget.bookModel.id.toString(),
+        'isliked': isliked.toString(),
+      }),
       child: Container(
         height: 170.h,
         padding: EdgeInsets.all(10.r),

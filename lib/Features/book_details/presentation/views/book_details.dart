@@ -17,13 +17,15 @@ class BookDetails extends StatefulWidget {
 }
 
 class _BookDetailsState extends State<BookDetails> {
-  bool isliked = false;
+  bool? isliked;
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      String bookID = ModalRoute.of(context)!.settings.arguments as String;
-      BlocProvider.of<BookDetailsCubit>(context).getBookDetails(bookId: bookID);
+      Map args = ModalRoute.of(context)!.settings.arguments as Map;
+      BlocProvider.of<BookDetailsCubit>(context)
+          .getBookDetails(bookId: args['bookid']);
+      isliked = bool.parse(args['isliked']);
     });
   }
 
@@ -34,7 +36,7 @@ class _BookDetailsState extends State<BookDetails> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: bookcbt.bookModel == null
+          body: state is BookDetailsLoading
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )

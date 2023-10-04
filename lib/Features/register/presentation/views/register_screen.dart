@@ -309,7 +309,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         );
                                       }
                                     },
-                                    child: Text(
+                                    child:state is RegisterLoading
+                                        ? const Center(
+                                            child: CircularProgressIndicator
+                                                .adaptive(
+                                              backgroundColor:
+                                                  AppColors.colorWhite,
+                                            ),
+                                          )
+                                        : Text(
                                       "Register",
                                       textAlign: TextAlign.center,
                                       style: AppStyles.textStyle24w400.copyWith(

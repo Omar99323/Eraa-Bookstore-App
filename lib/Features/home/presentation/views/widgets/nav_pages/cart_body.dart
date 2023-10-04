@@ -1,8 +1,8 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:book_store_eraa/Core/utils/app_colors.dart';
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/checkout/presentation/views/checkout.dart';
 import 'package:book_store_eraa/Features/home/data/models/cart_model.dart';
-import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,11 +22,7 @@ class _CartBodyState extends State<CartBody> {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(15.r),
-        child: HomeStates is HomeCartBooksLoading
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            : Column(
+        child:  Column(
                 children: [
                   Expanded(
                     child: ListView.separated(
@@ -71,7 +67,15 @@ class _CartBodyState extends State<CartBody> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            if (widget.cartModel.total != null) {
+                            if (widget.cartModel.total == null ||
+                                widget.cartModel.total == "0.00") {
+                              setState(() {
+                                AnimatedSnackBar.material(
+                                        "Add some items to cart first!",
+                                        type: AnimatedSnackBarType.error)
+                                    .show(context);
+                              });
+                            } else {
                               Navigator.pushNamed(context, CheckOut.id);
                             }
                           },

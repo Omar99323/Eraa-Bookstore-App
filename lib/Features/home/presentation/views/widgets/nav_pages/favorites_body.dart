@@ -1,6 +1,5 @@
 import 'package:book_store_eraa/Core/utils/app_styles.dart';
 import 'package:book_store_eraa/Features/home/data/models/book_model.dart';
-import 'package:book_store_eraa/Features/home/presentation/manager/cubit/home_state.dart';
 import 'package:book_store_eraa/Features/home/presentation/views/widgets/wishbook_componant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,17 +17,13 @@ class FavoritesBody extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.all(15.r),
-        child: HomeStates is HomeWishListBooksLoading
-            ? const Center(
-                child: CircularProgressIndicator.adaptive(),
-              )
-            : ListView.separated(
+        child: ListView.separated(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 itemCount: wishlistBooks.isEmpty ? 1 : wishlistBooks.length,
                 itemBuilder: (context, index) => wishlistBooks.isEmpty
                     ? Padding(
-                        padding:  EdgeInsets.only(top: 300.h),
+                        padding: EdgeInsets.only(top: 300.h),
                         child: Text(
                           'No books in favorites for now!',
                           textAlign: TextAlign.center,

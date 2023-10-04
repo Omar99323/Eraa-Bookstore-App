@@ -15,8 +15,14 @@ class BestSellerBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, BookDetails.id,
-          arguments: bookModel.id.toString()),
+      onTap: () => Navigator.pushNamed(
+        context,
+        BookDetails.id,
+        arguments: {
+          'bookid': bookModel.id.toString(),
+          'isliked': 'false',
+        },
+      ),
       child: SizedBox(
         width: 110.w,
         child: Column(

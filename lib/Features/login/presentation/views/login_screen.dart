@@ -229,15 +229,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                         );
                                       }
                                     },
-                                    child: Text(
-                                      "Login",
-                                      textAlign: TextAlign.center,
-                                      style: AppStyles.textStyle24w400.copyWith(
-                                        fontSize: 18,
-                                        color: AppColors.colorWhite,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                    child: state is LoginLoading
+                                        ? const Center(
+                                            child: CircularProgressIndicator
+                                                .adaptive(
+                                              backgroundColor:
+                                                  AppColors.colorWhite,
+                                            ),
+                                          )
+                                        : Text(
+                                            "Login",
+                                            textAlign: TextAlign.center,
+                                            style: AppStyles.textStyle24w400
+                                                .copyWith(
+                                              fontSize: 18,
+                                              color: AppColors.colorWhite,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                   ),
                                 ),
                               ],

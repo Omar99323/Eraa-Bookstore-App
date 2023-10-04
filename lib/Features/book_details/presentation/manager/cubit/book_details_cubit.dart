@@ -11,6 +11,7 @@ class BookDetailsCubit extends Cubit<BookDetailsState> {
   BookModel? bookModel;
 
   getBookDetails({required String bookId}) async {
+    emit(BookDetailsLoading());
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.bookDetailsEndpoint + bookId,

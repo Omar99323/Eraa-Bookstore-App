@@ -62,7 +62,6 @@ class _CheckOutState extends State<CheckOut> {
                   : Form(
                       key: key,
                       child: SingleChildScrollView(
-                        physics: const NeverScrollableScrollPhysics(),
                         child: Column(
                           children: [
                             CustomFormField(
@@ -75,6 +74,7 @@ class _CheckOutState extends State<CheckOut> {
                               onchange: (p0) {
                                 name = p0;
                               },
+                              validator: (p0) {},
                             ),
                             SizedBox(height: 15.h),
                             CustomFormField(
@@ -89,6 +89,7 @@ class _CheckOutState extends State<CheckOut> {
                                 Icons.email,
                                 color: AppColors.primaryswatch,
                               ),
+                              validator: (p0) {},
                             ),
                             SizedBox(height: 15.h),
                             CustomFormField(
@@ -103,9 +104,11 @@ class _CheckOutState extends State<CheckOut> {
                                 color: AppColors.primaryswatch,
                               ),
                               validator: (p0) {
+                                print(checkcbt.checkoutModel!.user!.phone);
+                                print(p0);
                                 if (checkcbt.checkoutModel!.user!.phone ==
                                         null &&
-                                    p0 == null) {
+                                    (p0 == null || p0.isEmpty)) {
                                   return 'Phone must not be empty';
                                 }
                               },
@@ -118,7 +121,7 @@ class _CheckOutState extends State<CheckOut> {
                               validator: (p0) {
                                 if (checkcbt.checkoutModel!.user!.address ==
                                         null &&
-                                    p0 == null) {
+                                    (p0 == null || p0.isEmpty)) {
                                   return 'Address must not be empty';
                                 }
                               },

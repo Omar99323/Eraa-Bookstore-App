@@ -19,8 +19,14 @@ class WishBookComponant extends StatelessWidget {
         (double.parse(bookModel.price!) * (bookModel.discount! / 100));
 
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, BookDetails.id,
-          arguments: bookModel.id.toString()),
+      onTap: () => Navigator.pushNamed(
+        context,
+        BookDetails.id,
+        arguments: {
+          'bookid': bookModel.id.toString(),
+          'isliked': 'true',
+        },
+      ),
       child: Container(
         height: 160.h,
         padding: EdgeInsets.all(10.r),

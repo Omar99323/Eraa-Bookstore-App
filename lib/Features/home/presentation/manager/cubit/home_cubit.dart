@@ -67,8 +67,10 @@ class HomeCubit extends Cubit<HomeStates> {
         token: token,
         body: {
           'product_id': id,
-        }).then((value) {});
-    emit(HomeAddToWishList());
+        }).then((value) {
+      emit(HomeAddToWishList());
+      wishListBooks();
+    });
   }
 
   addToCart({required String id}) async {
@@ -89,8 +91,12 @@ class HomeCubit extends Cubit<HomeStates> {
         token: token,
         body: {
           'cart_item_id': id,
-        }).then((value) {});
-    emit(HomeRemoveFromCart());
+        }).then((value) {
+      emit(HomeRemoveFromCart());
+      Future.delayed(const Duration(milliseconds: 100), () {
+        cartbooks();
+      });
+    });
   }
 
   updateCart({
@@ -104,8 +110,12 @@ class HomeCubit extends Cubit<HomeStates> {
         body: {
           'cart_item_id': id,
           'quantity': quantity,
-        }).then((value) {});
-    emit(HomeUpdateCart());
+        }).then((value) {
+      emit(HomeUpdateCart());
+      Future.delayed(const Duration(milliseconds: 100), () {
+        cartbooks();
+      });
+    });
   }
 
   removeFromWish({required String id}) async {
@@ -115,8 +125,12 @@ class HomeCubit extends Cubit<HomeStates> {
         token: token,
         body: {
           'product_id': id,
-        }).then((value) {});
-    emit(HomeRemoveFromWishList());
+        }).then((value) {
+      emit(HomeRemoveFromWishList());
+      Future.delayed(const Duration(milliseconds: 100), () {
+        wishListBooks();
+      });
+    });
   }
 
   getUserModel() async {
@@ -166,8 +180,8 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['sliders']) {
         slinderImgs.add(element['image']);
       }
+      emit(HomeSlinder());
     });
-    emit(HomeSlinder());
   }
 
   getAllBooks() async {
@@ -180,13 +194,12 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['products']) {
         allBooks.add(BookModel.fromJson(element));
       }
+      emit(HomeAllBooks());
     });
-    emit(HomeAllBooks());
   }
 
   cartbooks() async {
     cartBooks.clear();
-    emit(HomeCartBooksLoading());
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.cartEndpoint,
@@ -196,13 +209,12 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['cart_items']) {
         cartBooks.add(CartItems.fromJson(element));
       }
+      emit(HomeCartBooks());
     });
-    emit(HomeCartBooks());
   }
 
   wishListBooks() async {
     wishlistBooks.clear();
-    emit(HomeWishListBooksLoading());
     token = await SecureStorage.getData(key: 'token');
     await Api.get(
       url: EndPoints.baseUrl + EndPoints.wishlistEndpoint,
@@ -211,8 +223,8 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['data']) {
         wishlistBooks.add(BookModel.fromJson(element));
       }
+      emit(HomeWishListBooks());
     });
-    emit(HomeWishListBooks());
   }
 
   search({required String name}) async {
@@ -226,8 +238,8 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['products']) {
         searchBooks.add(BookModel.fromJson(element));
       }
+      emit(HomeSearchSuccess());
     });
-    emit(HomeSearchSuccess());
   }
 
   getBestSeller() async {
@@ -240,8 +252,8 @@ class HomeCubit extends Cubit<HomeStates> {
       for (var element in value['data']['products']) {
         listofBestSeller.add(BookModel.fromJson(element));
       }
+      emit(HomeBestSeller());
     });
-    emit(HomeBestSeller());
   }
 
   getNewArrival() async {

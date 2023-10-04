@@ -42,18 +42,6 @@ class _HomePageState extends State<HomePage> {
                   type: AnimatedSnackBarType.success)
               .show(context);
         }
-        if (state is HomeUpdateCart) {
-          BlocProvider.of<HomeCubit>(context).cartbooks();
-        }
-        if (state is HomeAddToWishList || state is HomeRemoveFromWishList) {
-          BlocProvider.of<HomeCubit>(context).wishListBooks();
-        }
-        if (state is HomeRemoveFromCart) {
-          BlocProvider.of<HomeCubit>(context).cartbooks();
-          AnimatedSnackBar.material('Book has removed from cart',
-                  type: AnimatedSnackBarType.success)
-              .show(context);
-        }
       },
       builder: (context, state) {
         var homecbt = BlocProvider.of<HomeCubit>(context);
